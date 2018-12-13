@@ -117,7 +117,7 @@
         <button onclick="window.location.href = 'index.html'">Quit To Menu</button><br><br>
         <button onclick="window.location.reload()">Restart Game</button>
     </div>
-    <div id="healthDisplay"></div>
+    <div id="timerDisplay"></div>
 
     <script>
         var camera, scene, renderer, controls;
@@ -143,6 +143,8 @@
         playerHealthLower(50);
         immortal(6000);
         animate();
+		var time = 0;
+		setInterval(1000, runTumer);
 
         function init() {
 
@@ -405,6 +407,36 @@
 
                 }
             );
+			
+			
+			            // load a resource
+            loader.load(
+                // resource URL
+                'Models/bridge2.obj',
+                // called when resource is loaded
+                function(object) {
+
+                    scene.add(object);
+					object.scale.set(15, 15, 15);
+					object.position.x = 400;
+					object.position.z = -30;
+					object.position.y = 20;
+                    bridge2 = object;
+
+                },
+                // called when loading is in progresses
+                function(xhr) {
+
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+                },
+                // called when loading has errors
+                function(error) {
+
+                    console.log('An error happened');
+
+                }
+            );
 
 
             //
@@ -490,6 +522,10 @@
         function mortal() {
             canDie = "yes";
         }
+		
+		function runTimer() {
+			timer++;
+		}
 
 
         function animate() {
