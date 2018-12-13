@@ -107,7 +107,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.5</p>
+		<p>v1.1.6</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -153,7 +153,7 @@
 		setInterval(1000, runTimer);
 
         function init() {
-
+	    alert("started init");
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
             camera.position.y = 10;
             camera.position.z = 25;
@@ -466,6 +466,8 @@
             //
 
             window.addEventListener('resize', onWindowResize, false);
+		
+	   alert("init over");
 
         }
         beeTexture = new THREE.TextureLoader().load("Images/bee.png");
