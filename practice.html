@@ -367,13 +367,13 @@
                 },
                 // called when loading is in progresses
                 function(xhr) {
-
+		    alert((xhr.loaded / xhr.total * 100) + '% loaded');
                     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 
                 },
                 // called when loading has errors
                 function(error) {
-
+		    alert('An error happened');
                     console.log('An error happened');
 
                 }
