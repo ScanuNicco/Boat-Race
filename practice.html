@@ -33,7 +33,7 @@
         #blocker {
 
             position: absolute;
-	display: none;
+
             width: 100%;
             height: 100%;
 
@@ -47,7 +47,6 @@
             background: #dddddd;
             text-align: center;
             position: fixed;
-		display: none;
             top: calc(50% - 250px);
             left: calc(50% - 150px);
         }
@@ -106,7 +105,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-	<button onclick="controls.lock(); alert('starting');">Start</button><br>
+	<button onclick="alert('about to lock controls'); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
             <button>Options</button><br>
@@ -173,6 +172,9 @@
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
 		
+		                instructions.style.display = 'none';
+                blocker.style.display = 'none';
+                document.getElementById("loading").style.display = "none";
 
             document.body.addEventListener('click', function(event) {
 		alert("clicked");
@@ -187,13 +189,13 @@
                 document.getElementById("loading").style.display = "none";
 
             });
-/*
+
             controls.addEventListener('unlock', function() {
 
                 blocker.style.display = 'block';
                 instructions.style.display = '';
 
-            });*/
+            });
 
             scene.add(controls.getObject());
 
