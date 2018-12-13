@@ -107,7 +107,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.6</p>
+		<p>v1.1.7</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -160,8 +160,7 @@
 		
 	    controls = new THREE.PointerLockControls(camera);
 	    alert("Controls is " + controls);
-		
-	    controls = new THREE.orbitControls(camera);
+
             velocity.y += 350;
             playerHealth = 100;
             document.getElementById("healthDisplay").innerHTML = playerHealth;
@@ -170,7 +169,7 @@
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0xffffff);
             scene.fog = new THREE.Fog(0xffffff, 0, 750);
-
+alert("point 0.5");
             var light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 0.75);
             light.position.set(0.5, 1, 0.75);
             scene.add(light);
