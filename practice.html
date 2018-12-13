@@ -171,7 +171,8 @@
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
 
-            blocker.addEventListener('click', function(event) {
+            document.body.addEventListener('click', function(event) {
+		alert("clicked");
                 controls.lock();
 
             }, false);
