@@ -107,7 +107,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.11</p>
+		<p>v1.1.12</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -167,7 +167,7 @@
             playerHealthLower(1);*/
 
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xffffff);
+            scene.background = new THREE.Color(0x00ff00);
             scene.fog = new THREE.Fog(0xffffff, 0, 750);
 //alert("point 0.5");
             var light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 0.75);
@@ -599,9 +599,9 @@
 
 
             }
-	//alert("rendering");
+	alert("rendering");
             renderer.render(scene, camera);
-	//alert("done rendering");
+	alert("done rendering");
         }
  
     </script>
