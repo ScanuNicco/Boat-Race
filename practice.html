@@ -107,7 +107,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.3</p>
+		<p>v1.1.4</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -549,6 +549,7 @@
 
         function animate() {
 try {
+	alert("starting animate");
             requestAnimationFrame(animate);
 		controls.update();
             if (controls.isLocked === true) {
@@ -601,8 +602,9 @@ try {
 
 
             }
-
+	alert("rendering");
             renderer.render(scene, camera);
+	alert("done rendering");
 }catch(err) {alert("Error in animate: " + err.message)}
         }
  
