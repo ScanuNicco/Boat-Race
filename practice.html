@@ -107,7 +107,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.12</p>
+		<p>v1.1.13</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -549,8 +549,9 @@
 	//alert("starting animate");
             requestAnimationFrame(animate);
 		controls.update();
+		
             if (controls.isLocked === true) {
-
+alert("point 1");
                 raycaster.ray.origin.copy(controls.getObject().position);
                 raycaster.ray.origin.y -= 10;
 
@@ -565,7 +566,7 @@
                 velocity.z -= velocity.z * 10.0 * delta;
 
                 velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-
+alert("point 2");
                 direction.z = Number(moveForward) - Number(moveBackward);
                 direction.x = Number(moveLeft) - Number(moveRight);
                 direction.normalize(); // this ensures consistent movements in all directions
@@ -579,7 +580,7 @@
                     canJump = true;
 
                 }
-
+alert("point 3");
                 controls.getObject().translateX(velocity.x * delta);
                 controls.getObject().translateY(velocity.y * delta);
                 controls.getObject().translateZ(velocity.z * delta);
@@ -596,7 +597,7 @@
                 boat.position.x = controls.getObject().position.x;
                 boat.position.z = controls.getObject().position.z;
                 boat.rotation.z = controls.getObject().rotation.y + Math.PI / 2;
-
+		alert("about to render");
 
             }
 	alert("rendering");
