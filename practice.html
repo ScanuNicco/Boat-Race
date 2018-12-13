@@ -137,6 +137,7 @@
         var direction = new THREE.Vector3();
         var vertex = new THREE.Vector3();
         var color = new THREE.Color();
+	var numSeconds = 4;
         var waitClock = setInterval(countdown, 1000);
 
         init();
@@ -458,7 +459,7 @@
             map: beeTexture
         });
 
-        var numSeconds = 4;
+        
 
         function countdown() {
             numSeconds--;
