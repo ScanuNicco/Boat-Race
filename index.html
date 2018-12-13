@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="menu.css">
+    <title>Scanu Productions Craftblox</title>
+    <style>
+        body { margin: 0; padding: 0; width: 100%; overflow-x: hidden;}
+		canvas { width: 100%; height: 100%;}
+	</style>
+</head>
+
+<body>
+    <div class="center">
+        <img src="Images/Logo.png" id="logo">
+        <div id="playContent"><button onclick="location.href = '#'" style="background: grey;">Singleplayer</button><br><button onclick="location.href = '#'" style="background: grey;">Multiplayer</button><br><button onclick="location.href = 'practice.html'">Practice Course</button>
+        </div>
+    </div>
+    <audio src="Music/main.mp3" autoplay="autoplay" loop="loop" type="audio/mp3"></audio>
+    <script src="Three/three.min.js"></script>
+    <script src="Three/OBJLoader.js"></script>
+    <script>
+        function loadBoat() {
+            // instantiate a loader
+            var loader = new THREE.OBJLoader();
+
+            // load a resource
+            loader.load(
+                // resource URL
+                'Models/boat.obj',
+                // called when resource is loaded
+                function(object) {
+
+                    scene.add(object);
+                    object.rotation.x = Math.PI / -2;
+                    object.scale.set(.1, .1, .1);
+                    object.position.y = 4.5;
+                    var cube = object;
+
+                },
+                // called when loading is in progresses
+                function(xhr) {
+
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+                },
+                // called when loading has errors
+                function(error) {
+
+                    console.log('An error happened');
+
+                }
+            );
+        }
+        var WIDTH = window.innerWidth;
+        var HEIGHT = window.innerHeight;
+        /* all our JavaScript code goes here */
+        var renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setClearColor(0xDDDDDD, 1);
+        document.body.appendChild(renderer.domElement);
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
+        camera.position.z = 50;
+        scene.add(camera);
+        var t = 0;
+        var boxGeometry = new THREE.BoxGeometry(10, 10, 10);
+        var basicMaterial = new THREE.MeshBasicMaterial({
+            color: 0x0095DD
+        });
+        var phongMaterial = new THREE.MeshPhongMaterial({
+            color: 0x0095DD
+        });
+        var lambertMaterial = new THREE.MeshLambertMaterial({
+            color: 0x0095DD
+        });
+        for (i = 0; i < 100000; i++){
+            if(i == 1){
+            loadBoat();
+            }
+            console.log("waiting");
+        }
+
+            cube.position.y = -20;
+            cube.rotation.set(0.4, 0.2, 0);
+            var light = new THREE.PointLight(0xFFFFFF);
+            light.position.set(-10, 15, 50);
+            scene.add(light);
+
+        function render() {
+            requestAnimationFrame(render);
+            cube.rotation.y += 0.02;
+            renderer.render(scene, camera);
+            t += 0.02;
+        }
+        render();
+    </script>
+</body>
+</html>

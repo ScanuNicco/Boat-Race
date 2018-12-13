@@ -1,0 +1,26 @@
+#logo {
+	position: absolute;
+	top: 0px;
+	margin: auto;
+	width: 50%;
+	left: 25%;
+}
+
+.center {
+	text-align: center;
+	width: 100%;
+	position:absolute;
+}
+
+button {
+	margin: 5px;
+	padding: 10px;
+	color: white;
+	font-size: 30px;
+	background: #0095DD;
+	border: none;
+	border-radius: 5px;
+}
+#playContent {
+    margin:350px;
+}
