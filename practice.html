@@ -171,6 +171,10 @@
 
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
+		
+		                instructions.style.display = 'none';
+                blocker.style.display = 'none';
+                document.getElementById("loading").style.display = "none";
 
             document.body.addEventListener('click', function(event) {
 		alert("clicked");
