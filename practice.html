@@ -149,7 +149,7 @@
         immortal(6000);
         animate();
 		var time = 0;
-		setInterval(1000, runTumer);
+		setInterval(1000, runTimer);
 
         function init() {
 
@@ -172,7 +172,7 @@
             scene.add(light);
 
             controls = new THREE.PointerLockControls(camera);
-
+	    alert("Controls is " + controls);
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
 		
