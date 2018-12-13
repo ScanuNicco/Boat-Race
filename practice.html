@@ -175,7 +175,7 @@
             light.position.set(0.5, 1, 0.75);
             scene.add(light);
 
-            
+        alert("point 1");
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
 		
@@ -188,7 +188,7 @@
                 controls.lock();
 
             }, false);
-
+alert("point 2");
             controls.addEventListener('lock', function() {
 
                 instructions.style.display = 'none';
@@ -196,7 +196,7 @@
                 document.getElementById("loading").style.display = "none";
 
             });
-
+alert("point 3");
             controls.addEventListener('unlock', function() {
 
                 blocker.style.display = 'block';
@@ -205,7 +205,7 @@
             });
 
             scene.add(controls.getObject());
-
+alert("point 4");
             var onKeyDown = function(event) {
 
                 switch (event.keyCode) {
@@ -266,7 +266,7 @@
                 }
 
             };
-
+alert("point 5");
             document.addEventListener('keydown', onKeyDown, false);
             document.addEventListener('keyup', onKeyUp, false);
 
@@ -315,7 +315,7 @@
 
             var floor = new THREE.Mesh(floorGeometry, floorMaterial);
             scene.add(floor);
-
+alert("point 6");
             // objects
 
             boxGeometry = new THREE.BoxBufferGeometry(24, 12, 24);
@@ -361,7 +361,7 @@
                     objects.push(box);
                 }
             }
-            
+            alert("point 7");
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -- LOADERS -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             // instantiate a loader
             var loader = new THREE.OBJLoader();
@@ -453,7 +453,7 @@
                 }
             );
 
-
+alert("point 8");
             //
 
             renderer = new THREE.WebGLRenderer({
