@@ -109,7 +109,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.16</p>
+		<p>v1.1.17</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -286,10 +286,8 @@
 		);
 		water.rotation.x = - Math.PI / 2;
 		scene.add( water );
-		alert("creating sky");
 		var sky = new THREE.Sky();
-		sky.scale.setScalar( 10000 );
-		alert("adding sky");
+		sky.scale.setScalar( 10000 );;
 		scene.add( sky );
 		var uniforms = sky.material.uniforms;
 		uniforms.turbidity.value = 10;
@@ -297,34 +295,22 @@
 		uniforms.luminance.value = 1;
 		uniforms.mieCoefficient.value = 0.005;
 		uniforms.mieDirectionalG.value = 0.8;
-		alert("set uniforms");
 		var parameters = {
 			distance: 400,
 			inclination: 0.49,
 			azimuth: 0.205
 		};
-		alert("set params");
 		function updateSun() {
-			alert("updating sun");
 			var theta = Math.PI * ( parameters.inclination - 0.5 );
-			alert("a");
 			var phi = 2 * Math.PI * ( parameters.azimuth - 0.5 );
-			alert("b");
 			light.position.x = parameters.distance * Math.cos( phi );
-			alert("c");
 			light.position.y = parameters.distance * Math.sin( phi ) * Math.sin( theta );
-			alert("d");
 			light.position.z = parameters.distance * Math.sin( phi ) * Math.cos( theta );
-			alert("e");
 			sky.material.uniforms.sunPosition.value = light.position.copy( light.position );
-			alert("f");
 			water.material.uniforms.sunDirection.value.copy( light.position ).normalize();
-			alert("g");
-			cubeCamera.update( renderer, scene );
+			camera.update( renderer, scene );
 		}
-		alert("created function");
 		updateSun();
-		alert("sky created");
             // floor
 
             /*var floorGeometry = new THREE.PlaneBufferGeometry(2000, 2000, 100, 100);
