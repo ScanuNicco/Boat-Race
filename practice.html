@@ -387,7 +387,7 @@
                 },
                 // called when loading has errors
                 function(error) {
-		    alert('An error happened');
+		        //alert('An error happened');
                     console.log('An error happened');
 
                 }
@@ -548,10 +548,10 @@
         function animate() {
 	//alert("starting animate");
             requestAnimationFrame(animate);
-		controls.update();
+		//controls.update();
 		
             if (controls.isLocked === true) {
-alert("point 1");
+//alert("point 1");
                 raycaster.ray.origin.copy(controls.getObject().position);
                 raycaster.ray.origin.y -= 10;
 
@@ -566,7 +566,7 @@ alert("point 1");
                 velocity.z -= velocity.z * 10.0 * delta;
 
                 velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-alert("point 2");
+//alert("point 2");
                 direction.z = Number(moveForward) - Number(moveBackward);
                 direction.x = Number(moveLeft) - Number(moveRight);
                 direction.normalize(); // this ensures consistent movements in all directions
@@ -580,7 +580,7 @@ alert("point 2");
                     canJump = true;
 
                 }
-alert("point 3");
+//alert("point 3");/
                 controls.getObject().translateX(velocity.x * delta);
                 controls.getObject().translateY(velocity.y * delta);
                 controls.getObject().translateZ(velocity.z * delta);
@@ -597,12 +597,12 @@ alert("point 3");
                 boat.position.x = controls.getObject().position.x;
                 boat.position.z = controls.getObject().position.z;
                 boat.rotation.z = controls.getObject().rotation.y + Math.PI / 2;
-		alert("about to render");
+		//alert("about to render");
 
             }
-	alert("rendering");
+	//alert("rendering");
             renderer.render(scene, camera);
-	alert("done rendering");
+	//alert("done rendering");
         }
  
     </script>
