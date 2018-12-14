@@ -90,7 +90,7 @@
             font-size: 80px;
         }
 
-        #healthDisplay {
+        #timerDisplay {
             margin: auto;
             font-size: 28px;
             padding: 2px;
@@ -172,8 +172,10 @@
         playerHealthLower(50);
         immortal(6000);
         animate();
-		var time = 0;
-		setInterval(1000, runTimer);
+		var lapMSeconds = 0;
+		var lapSeconds = 0;
+		var lapMinutes = 0;
+		var timer = window.setInterval(runTimer, 16);
 
         function init() {
 	    //alert("started init");
@@ -393,33 +395,80 @@
             boxGeometry.addAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
             sandTexture = new THREE.TextureLoader().load("Images/brick.jpg");
-            for (var h = -20; h < 40; h++) {
-                for (var j = 1; j < 20; j++) {
-                    boxMaterial = new THREE.MeshBasicMaterial({
-                        map: sandTexture
-                    });
-                    var box = new THREE.Mesh(boxGeometry, boxMaterial);
-                    box.position.x = h * 24;
-                    box.position.z = j * 24;
-                    box.position.y = 4;
-                    scene.add(box);
-                    objects.push(box);
-                }
-            }
+            //Middle Block
+			for (var h = -20; h < 40; h++) {
+				for (var j = 1; j < 20; j++) {
+					boxMaterial = new THREE.MeshBasicMaterial({
+						map: sandTexture
+					});
+					var box = new THREE.Mesh(boxGeometry, boxMaterial);
+					box.position.x = h * 24;
+					box.position.z = j * 24;
+					box.position.y = 4;
+					scene.add(box);
+					objects.push(box);
+				}
+			}
 
-            for (var h = -20; h < 40; h++) {
-                for (var j = -19; j < -2; j++) {
-                    boxMaterial = new THREE.MeshBasicMaterial({
-                        map: sandTexture
-                    });
-                    var box = new THREE.Mesh(boxGeometry, boxMaterial);
-                    box.position.x = h * 24;
-                    box.position.z = j * 24;
-                    box.position.y = 4;
-                    scene.add(box);
-                    objects.push(box);
-                }
-            }
+			//Right Side
+			for (var h = -35; h < 43; h++) {
+				for (var j = -19; j < -2; j++) {
+					boxMaterial = new THREE.MeshBasicMaterial({
+						map: sandTexture
+					});
+					var box = new THREE.Mesh(boxGeometry, boxMaterial);
+					box.position.x = h * 24;
+					box.position.z = j * 24;
+					box.position.y = 4;
+					scene.add(box);
+					objects.push(box);
+				}
+			}
+			
+			//Above
+			for (var h = 43; h < 60; h++) {
+				for (var j = -20; j < 40; j++) {
+					boxMaterial = new THREE.MeshBasicMaterial({
+						map: sandTexture
+					});
+					var box = new THREE.Mesh(boxGeometry, boxMaterial);
+					box.position.x = h * 24;
+					box.position.z = j * 24;
+					box.position.y = 4;
+					scene.add(box);
+					objects.push(box);
+				}
+			}
+			
+			//Left Side
+			for (var h = -23; h < 43; h++) {
+				for (var j = 23; j < 40; j++) {
+					boxMaterial = new THREE.MeshBasicMaterial({
+						map: sandTexture
+					});
+					var box = new THREE.Mesh(boxGeometry, boxMaterial);
+					box.position.x = h * 24;
+					box.position.z = j * 24;
+					box.position.y = 4;
+					scene.add(box);
+					objects.push(box);
+				}
+			}
+			
+			// Behind
+			for (var h = -43; h < -23; h++) {
+				for (var j = -2; j < 43; j++) {
+					boxMaterial = new THREE.MeshBasicMaterial({
+						map: sandTexture
+					});
+					var box = new THREE.Mesh(boxGeometry, boxMaterial);
+					box.position.x = h * 24;
+					box.position.z = j * 24;
+					box.position.y = 4;
+					scene.add(box);
+					objects.push(box);
+				}
+			}
             //alert("point 7");
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -- LOADERS -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             // instantiate a loader
@@ -600,8 +649,17 @@
         }
 		
 		function runTimer() {
-			timer++;
-			document.getElementById("timerDisplay").innerHTML = timer;
+			lapMSeconds++;
+			if(lapMSeconds == 60){
+				lapSeconds++;
+				lapMSeconds = 0;
+			}
+			if(lapSeconds == 60){
+				lapMinutes++;
+				lapSeconds = 0;
+			}
+			var lapString = lapMinutes + ":" + lapSeconds + ":" + lapMSeconds;
+			document.getElementById("timerDisplay").innerHTML = lapString;
 		}
 	    
 	    function show(EID){
