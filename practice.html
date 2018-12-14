@@ -123,15 +123,15 @@
 	<button onclick="controls.lock();">Resume Game</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
-            <button onclick="show('options'); setTimeout(50, controls.unlock)">Options</button><br>
-            <button onclick="show('credits'); setTimeout(50, controls.unlock)">Credits</button><br>
+            <button onclick="show('options'); setTimeout(controls.unlock, 50)">Options</button><br>
+            <button onclick="show('credits'); setTimeout(controls.unlock, 50)">Credits</button><br>
         </div>
-	    <div id="options" class="window" style="display : none;" onclick="setTimeout(50, controls.unlock)">
+	    <div id="options" class="window" style="display : none;" onclick="setTimeout(controls.unlock, 50)">
 		    <h1>Options</h1>
 		    <p>Coming Soon!</p>
 		    <button onclick="hide('options')">Close</button>
 	    </div>
-	    <div id="credits" class="window" style="display: none;" onclick="setTimeout(50, controls.unlock)">
+	    <div id="credits" class="window" style="display: none;" onclick="setTimeout(controls.unlock, 50)">
 		    <h1>Credits</h1>
 		    <p>Made by: <a href="https://scanurag.com">ScanuRag</a> and <a href="https://zorbulator.com">Zorbulator</a></p>
 		    <button onclick="hide('options')">Close</button>
