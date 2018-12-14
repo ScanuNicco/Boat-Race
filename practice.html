@@ -54,7 +54,17 @@
             top: calc(50% - 250px);
             left: calc(50% - 150px);
         }
-
+	    
+	.window {
+		width: 500px;
+            height: 500px;
+            background: #dddddd;
+            text-align: center;
+            position: fixed;
+            top: calc(50% - 250px);
+            left: calc(50% - 250px);
+	    }
+	    
         #died {
             background: rgba(255, 0, 0, .4);
             position: fixed;
@@ -109,13 +119,23 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.19</p>
+		<p>v1.1.20</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
-            <button>Options</button><br>
-            <button>Credits</button><br>
+            <button onclick="show('options');">Options</button><br>
+            <button onclick="show('credits');">Credits</button><br>
         </div>
+	    <div id="options" class="window" style="display : none;">
+		    <h1>Options</h1>
+		    <p>Coming Soon!</p>
+		    <button onclick="hide('options')">Close</button>
+	    </div>
+	    <div id="credits" class="window" style="display: none;">
+		    <h1>Credits</h1>
+		    <p>Made by: <a href="https://scanurag.com">ScanuRag</a> and <a href="https://zorbulator.com">Zorbulator</a></p>
+		    <button onclick="hide('options')">Close</button>
+	    </div>
 
     </div>
     <div id="died">
@@ -583,6 +603,14 @@
 			timer++;
 			document.getElementById("timerDisplay").innerHTML = timer;
 		}
+	    
+	    function show(EID){
+		    document.getElementById(EID).style.display = "block";
+	    }
+	    
+	    function hide(EID){
+		    document.getElementById(EID).style.display = "none";
+	    }
 
 
         function animate() {
