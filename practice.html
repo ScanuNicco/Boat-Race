@@ -119,22 +119,22 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.23</p>
+		<p>v1.1.24</p>
 	<button onclick="controls.lock();">Resume Game</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
-            <button onclick="show('options'); setTimeout(controls.unlock, 50)">Options</button><br>
-            <button onclick="show('credits'); setTimeout(controls.unlock, 50)">Credits</button><br>
+            <button onclick="show('options'); setTimeout(controls.unlock, 20)">Options</button><br>
+            <button onclick="show('credits'); setTimeout(controls.unlock, 20)">Credits</button><br>
         </div>
-	    <div id="options" class="window" style="display : none;" onclick="setTimeout(controls.unlock, 50)">
+	    <div id="options" class="window" style="display : none;" onclick="setTimeout(controls.unlock, 20)">
 		    <h1>Options</h1>
 		    <p>Coming Soon!</p>
 		    <button onclick="hide('options')">Close</button>
 	    </div>
-	    <div id="credits" class="window" style="display: none;" onclick="setTimeout(controls.unlock, 50)">
+	    <div id="credits" class="window" style="display: none;" onclick="setTimeout(controls.unlock, 20)">
 		    <h1>Credits</h1>
 		    <p>Made by: <a href="https://scanurag.com">ScanuRag</a> and <a href="https://zorbulator.com">Zorbulator</a></p>
-		    <button onclick="hide('options')">Close</button>
+		    <button onclick="hide('credits')">Close</button>
 	    </div>
 
     </div>
