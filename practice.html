@@ -109,7 +109,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.14</p>
+		<p>v1.1.15</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -145,7 +145,7 @@
         var direction = new THREE.Vector3();
         var vertex = new THREE.Vector3();
         var color = new THREE.Color();
-	var numSeconds = 4;
+		var numSeconds = 4;
         var waitClock = setInterval(countdown, 1000);
 
         init();
@@ -172,11 +172,10 @@
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x00ff00);
             scene.fog = new THREE.Fog(0xffffff, 0, 750);
-//alert("point 0.5");
+
             var light = new THREE.DirectionalLight( 0xffffff, 0.8 );;
             scene.add(light);
 
-        //alert("point 1");
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
 		
@@ -185,11 +184,9 @@
                 document.getElementById("loading").style.display = "none";
 
             document.body.addEventListener('click', function(event) {
-		//alert("clicked");
                 controls.lock();
 
             }, false);
-//alert("point 2");
             controls.addEventListener('lock', function() {
 
                 instructions.style.display = 'none';
@@ -197,7 +194,6 @@
                 document.getElementById("loading").style.display = "none";
 
             });
-//alert("point 3");
             controls.addEventListener('unlock', function() {
 
                 blocker.style.display = 'block';
@@ -206,7 +202,6 @@
             });
 
             scene.add(controls.getObject());
-//alert("point 4");
             var onKeyDown = function(event) {
 
                 switch (event.keyCode) {
@@ -272,7 +267,7 @@
             document.addEventListener('keyup', onKeyUp, false);
 
             raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, -1, 0), 0, 10);
-		
+		alert("creating water");
 	    var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
 		water = new THREE.Water(
 			waterGeometry,
@@ -292,7 +287,7 @@
 		);
 		water.rotation.x = - Math.PI / 2;
 		scene.add( water );
-			
+			alert("creating sky");
 		var sky = new THREE.Sky();
 			sky.scale.setScalar( 10000 );
 			scene.add( sky );
@@ -319,7 +314,7 @@
 					cubeCamera.update( renderer, scene );
 			}
 			updateSun();
-
+			alert("sky created");
             // floor
 
             /*var floorGeometry = new THREE.PlaneBufferGeometry(2000, 2000, 100, 100);
