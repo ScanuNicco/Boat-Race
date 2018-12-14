@@ -109,7 +109,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-		<p>v1.1.17</p>
+		<p>v1.1.18</p>
 	<button onclick="alert(controls); controls.lock(); alert('starting');">Start</button><br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button><br>
             <button onclick="window.location.reload()">Restart Game</button><br>
@@ -308,7 +308,7 @@
 			light.position.z = parameters.distance * Math.sin( phi ) * Math.cos( theta );
 			sky.material.uniforms.sunPosition.value = light.position.copy( light.position );
 			water.material.uniforms.sunDirection.value.copy( light.position ).normalize();
-			camera.update( renderer, scene );
+			//camera.update( renderer, scene );
 		}
 		updateSun();
             // floor
