@@ -1,0 +1,13 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl 13093_gold_twisted_rope_bracelet
+Ns 58.823529
+Ka 0.563400 0.563400 0.563400
+Kd 0.917600 0.545100 0.227500
+Ks 0.630000 0.630000 0.630000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+refl C:\\Users\\Nicco\\Downloads\\gold_twisted_rope_bracelet_v1_L2.123c68afb7e2-235a-4c49-afa2-706cc51733ce\\gold_twisted_rope_bracelet_v1_L2.123c68afb7e2-235a-4c49-afa2-706cc51733ce\\13093_gold_twisted_rope_bracelet.jpg

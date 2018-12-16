@@ -16,7 +16,7 @@
         <div id="playContent"><button onclick="location.href = '#'" style="background: grey;">Singleplayer</button><br><button onclick="location.href = '#'" style="background: grey;">Multiplayer</button><br><button onclick="location.href = 'practice.html'">Practice Course</button>
         </div>
     </div>
-    <audio src="Music/main.mp3" autoplay="autoplay" loop="loop" type="audio/mp3"></audio>
+    <audio src="Music/main.wav" autoplay="autoplay" loop="loop" type="audio/wav"></audio>
     <script src="Three/three.min.js"></script>
     <script src="Three/OBJLoader.js"></script>
     <script>
@@ -85,7 +85,7 @@
 
         function render() {
             requestAnimationFrame(render);
-            cube.rotation.y += 0.02;
+            //cube.rotation.y += 0.02;
             renderer.render(scene, camera);
             t += 0.02;
         }

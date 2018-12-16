@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <audio id="backgroundMusic" src="https://scanunicco.github.io/Boat-Race/Music/main.mp3" autoplay="autoplay" loop="loop" type="audio/mp3"></audio>
+    <audio id="backgroundMusic" src="Music/main.wav" autoplay="autoplay" loop="loop" type="audio/wav"></audio>
     <audio id="oofSound" src="https://scanunicco.github.io/Boat-Race/Music/oof.mp3" autostart="false"></audio>
     <audio id="diedSound" src="https://scanunicco.github.io/Boat-Race/Music/died.mp3" autostart="false" loop="loop"></audio>
     <script src="https://scanunicco.github.io/Boat-Race/Three/three.min.js"></script>
@@ -161,7 +161,8 @@
         <button onclick="window.location.reload()">Restart Game</button>
     </div>
     <div>
-        <div id="timerDisplay"></div><div id="speedDisplay">0</div>
+        <div id="timerDisplay"></div>
+        <div id="speedDisplay">0</div>
     </div>
 
     <script>
@@ -224,18 +225,18 @@
             blocker.style.display = 'none';
             document.getElementById("loading").style.display = "none";
 
-            document.body.addEventListener('click', function (event) {
+            document.body.addEventListener('click', function(event) {
                 controls.lock();
 
             }, false);
-            controls.addEventListener('lock', function () {
+            controls.addEventListener('lock', function() {
 
                 instructions.style.display = 'none';
                 blocker.style.display = 'none';
                 document.getElementById("loading").style.display = "none";
 
             });
-            controls.addEventListener('unlock', function () {
+            controls.addEventListener('unlock', function() {
 
                 blocker.style.display = 'block';
                 instructions.style.display = '';
@@ -243,7 +244,7 @@
             });
 
             scene.add(controls.getObject());
-            var onKeyDown = function (event) {
+            var onKeyDown = function(event) {
 
                 switch (event.keyCode) {
 
@@ -270,7 +271,7 @@
 
             };
 
-            var onKeyUp = function (event) {
+            var onKeyUp = function(event) {
 
                 switch (event.keyCode) {
 
@@ -309,7 +310,7 @@
                     textureHeight: 512,
                     waterNormals: new THREE.TextureLoader().load(
                         'https://threejs.org/examples/textures/waternormals.jpg',
-                        function (texture) {
+                        function(texture) {
                             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
                         }),
                     alpha: 1.0,
@@ -494,7 +495,7 @@
                 // resource URL
                 'Models/boat.obj',
                 // called when resource is loaded
-                function (object) {
+                function(object) {
 
                     scene.add(object);
                     object.rotation.x = Math.PI / -2;
@@ -504,13 +505,13 @@
 
                 },
                 // called when loading is in progresses
-                function (xhr) {
+                function(xhr) {
                     //alert((xhr.loaded / xhr.total * 100) + '% loaded');
                     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 
                 },
                 // called when loading has errors
-                function (error) {
+                function(error) {
                     //alert('An error happened');
                     console.log('An error happened');
 
@@ -522,7 +523,7 @@
                 // resource URL
                 'Models/bridge.obj',
                 // called when resource is loaded
-                function (object) {
+                function(object) {
 
                     scene.add(object);
                     object.rotation.x = Math.PI / -2;
@@ -533,13 +534,13 @@
 
                 },
                 // called when loading is in progresses
-                function (xhr) {
+                function(xhr) {
 
                     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 
                 },
                 // called when loading has errors
-                function (error) {
+                function(error) {
 
                     console.log('An error happened');
 
@@ -552,7 +553,7 @@
                 // resource URL
                 'Models/bridge2.obj',
                 // called when resource is loaded
-                function (object) {
+                function(object) {
 
                     scene.add(object);
                     object.scale.set(15, 15, 15);
@@ -563,18 +564,50 @@
 
                 },
                 // called when loading is in progresses
-                function (xhr) {
+                function(xhr) {
 
                     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 
                 },
                 // called when loading has errors
-                function (error) {
+                function(error) {
 
                     console.log('An error happened');
 
                 }
             );
+
+            // load a resource
+            loader.load(
+                // resource URL
+                'Models/railing.obj',
+                // called when resource is loaded
+                function(object) {
+
+                    for (i = 0; i <= 10; i++) {
+                        object.scale.set(3, 3, 3);
+                        object.position.x = i * 10;
+                        console.log("added object at " + (i * 10));
+                        object.position.z = 20;
+                        object.position.y = 10;
+                        scene.add(object);
+                    }
+
+                },
+                // called when loading is in progresses
+                function(xhr) {
+
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+                },
+                // called when loading has errors
+                function(error) {
+
+                    console.log('An error happened');
+
+                }
+            );
+
 
             //alert("point 8");
             //
@@ -721,7 +754,7 @@
 
                 velocity.x -= velocity.x * BOAT_STATS.friction * delta;
                 velocity.z -= velocity.z * BOAT_STATS.friction * delta;
-                
+
                 direction.z = Number(moveForward) - Number(moveBackward);
 
                 direction.normalize(); // this ensures consistent movements in all directions
@@ -730,7 +763,7 @@
 
                 var turnDist = (Number(turnLeft) - Number(turnRight)) * BOAT_STATS.turning * delta;
 
-                var vector = new THREE.Vector3( 1, 0, 0 );
+                var vector = new THREE.Vector3(1, 0, 0);
 
                 vector.applyQuaternion(boat.quaternion);
 
@@ -742,8 +775,8 @@
                     velocity.z += vector.z;
                 }
 
-                
-               
+
+
                 controls.getObject().position.x += velocity.x * delta;
                 controls.getObject().position.y += velocity.y * delta;
                 controls.getObject().position.z += velocity.z * delta;
@@ -752,7 +785,7 @@
                 boat.position.x = controls.getObject().position.x;
                 boat.position.z = controls.getObject().position.z;
                 boat.rotation.z += turnDist;
-                
+
                 document.getElementById("speedDisplay").innerText = Math.floor(Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
             }
             water.material.uniforms.time.value += 1.0 / 60.0;
