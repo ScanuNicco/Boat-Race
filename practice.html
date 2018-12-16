@@ -704,8 +704,8 @@ var counter = 0;
 
             lapMinutes = Math.floor(lapMSeconds / 60000)
 
-            var lapString = fixTime(lapMinutes) + ":" + fixTime(lapSeconds) + ":" + fixTime(lapHundredthSeconds);
-            document.getElementById("timerDisplay").innerHTML = lapString;
+            var lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
+            document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString;
         }
 
         function fixTime(num) {
@@ -785,7 +785,17 @@ var counter = 0;
                 boat.position.z = controls.getObject().position.z;
                 boat.rotation.z += turnDist;
 
-                document.getElementById("speedDisplay").innerText = Math.floor(Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
+                var speed = Math.floor(Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
+                document.getElementById("speedDisplay").innerText = "Speed: " + speed;
+                if(speed > 200){
+                    document.getElementById("speedDisplay").style.color = "red";
+                } else if(speed > 150){
+                    document.getElementById("speedDisplay").style.color = "orange";
+                } else if(speed > 100){
+                    document.getElementById("speedDisplay").style.color = "#bca600";
+                } else {
+                    document.getElementById("speedDisplay").style.color = "green";
+                }
             }
             water.material.uniforms.time.value += 1.0 / 60.0;
             renderer.render(scene, camera);
