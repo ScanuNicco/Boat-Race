@@ -130,7 +130,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-            <p>v1.1.27</p>
+            <p>v1.1.28</p>
             <button onclick="controls.lock();">Resume Game</button>
             <br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button>
@@ -808,18 +808,24 @@ var counter = 0;
                 controls.getObject().position.y += velocity.y * delta;
                 controls.getObject().position.z += velocity.z * delta;
                 
-                for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {       
+                alert("about to check collision");
+                
+                for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) { 
+                    alert("started loop");
                     var localVertex = boat.geometry.vertices[vertexIndex].clone();
                     var globalVertex = boat.matrix.multiplyVector3(localVertex);
                     var directionVector = globalVertex.subSelf( boat.position );
-
+                    alert("set vars");
                     var ray = new THREE.Ray( boat.position, directionVector.clone().normalize() );
                     var collisionResults = ray.intersectObjects( collidableMeshList );
+                    alert("created ray");
                     if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) 
                     {
                         alert("Collision!");
                     }
+                    alert("checked for collision");
                 }
+                alert("loop over");
 
 
                 prevTime = time;
