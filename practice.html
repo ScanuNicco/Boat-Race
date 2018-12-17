@@ -130,7 +130,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-            <p>v1.1.29</p>
+            <p>v1.1.30</p>
             <button onclick="controls.lock();">Resume Game</button>
             <br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button>
@@ -809,7 +809,7 @@ var counter = 0;
                 controls.getObject().position.z += velocity.z * delta;
                 
                 alert("about to check collision");
-                alert(boat.geometry.vertices.length);
+                alert(boat.geometry);
                 
                 for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) { 
                     alert("started loop");
