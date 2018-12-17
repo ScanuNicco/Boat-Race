@@ -130,7 +130,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-            <p>v1.1.25</p>
+            <p>v1.1.26</p>
             <button onclick="controls.lock();">Resume Game</button>
             <br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button>
@@ -225,6 +225,10 @@
 
             var light = new THREE.DirectionalLight(0xffffff, 0.8);;
             scene.add(light);
+            
+            var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+            scene.add( light );
+
 
             var blocker = document.getElementById('blocker');
             var instructions = document.getElementById('menu');
