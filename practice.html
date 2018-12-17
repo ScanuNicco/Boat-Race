@@ -130,7 +130,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-            <p>v1.1.38</p>
+            <p>v1.1.39</p>
             <button onclick="controls.lock();">Resume Game</button>
             <br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button>
@@ -818,6 +818,8 @@ var counter = 0;
 
                 
                 var boatGeo = boat.children[0].geometry;
+                alert(boatGeo.isBufferGeometry);
+                alert(boatGeo.attributes.position);
                 for (var vertexIndex = 0; vertexIndex < boatGeo.geometry.vertices.length; vertexIndex++) { 
                     var localVertex = boatGeo.geometry.vertices[vertexIndex].clone();
                     var globalVertex = boatGeo.matrix.multiplyVector3(localVertex);
