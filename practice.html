@@ -576,6 +576,7 @@
             );
 
 var counter = 0;
+            var fenceMaterial = new THREE.MeshPhongMaterial({color: 0x555555});
             for (var i = 0; i <= 10; i++) {
                 // load a resource
                 loader.load(
@@ -590,6 +591,7 @@ var counter = 0;
                         console.log("added object at " + (counter));
                         object.position.z = 20;
                         object.position.y = 10;
+                        object.material = fenceMaterial;
                         scene.add(object);
                         counter++;
                     },
