@@ -711,6 +711,7 @@ var counter = 0;
         }
 
         function runTimer(ms) {
+            if (controls.isLocked === true) {
             lapMSeconds += ms;
 
             lapHundredthSeconds = Math.floor((lapMSeconds / 10) % 100);
@@ -721,6 +722,7 @@ var counter = 0;
 
             var lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
             document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString;
+            }
         }
 
         function fixTime(num) {
