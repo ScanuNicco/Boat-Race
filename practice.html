@@ -130,7 +130,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <br>
-            <p>v1.1.26</p>
+            <p>v1.1.27</p>
             <button onclick="controls.lock();">Resume Game</button>
             <br>
             <button onclick="window.location.href = 'index.html'">Quit Game</button>
@@ -740,7 +740,6 @@ var counter = 0;
         }
 
         var BOAT_STATS = {
-            speed: 100,
             acceleration: 100,
             turning: 2,
             friction: .5
@@ -787,11 +786,9 @@ var counter = 0;
 
                 vector.multiplyScalar(acceleration.z);
 
-                if (velocity.x + velocity.y + velocity.z < BOAT_STATS.speed) {
-                    velocity.x += vector.x;
-                    velocity.y += vector.y;
-                    velocity.z += vector.z;
-                }
+                velocity.x += vector.x;
+                velocity.y += vector.y;
+                velocity.z += vector.z;
                 
                 if (boat.position.x < 10 && boat.position.x > -10 ){
                     if(boat.position.z < 0 && boat.position.z > -40 ){
@@ -810,6 +807,20 @@ var counter = 0;
                 controls.getObject().position.x += velocity.x * delta;
                 controls.getObject().position.y += velocity.y * delta;
                 controls.getObject().position.z += velocity.z * delta;
+                
+                for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {       
+                    var localVertex = boat.geometry.vertices[vertexIndex].clone();
+                    var globalVertex = boat.matrix.multiplyVector3(localVertex);
+                    var directionVector = globalVertex.subSelf( boat.position );
+
+                    var ray = new THREE.Ray( boat.position, directionVector.clone().normalize() );
+                    var collisionResults = ray.intersectObjects( collidableMeshList );
+                    if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) 
+                    {
+                        alert("Collision!");
+                    }
+                }
+
 
                 prevTime = time;
                 boat.position.x = controls.getObject().position.x;
