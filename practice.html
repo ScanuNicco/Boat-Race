@@ -204,6 +204,8 @@
         var lapMSeconds = 0;
         var lapSeconds = 0;
         var lapMinutes = 0;
+
+        var directionVector = new THREE.Vector3(); //used in the collision detection later
         //var timer = window.setInterval(runTimer, 1);
 
         function init() {
@@ -504,7 +506,7 @@
             // load a resource
             loader.load(
                 // resource URL
-                'Models/boat.obj',
+                'https://scanunicco.github.io/Boat-Race/Models/placeholderboat.obj',
                 // called when resource is loaded
                 function(object) {
 
@@ -512,6 +514,7 @@
                     object.rotation.x = Math.PI / -2;
                     object.scale.set(.1, .1, .1);
                     object.position.y = 4.5;
+                    object.geometry = new THREE.Geometry().fromBufferGeometry(object.children[0].geometry);
                     boat = object;
 
                 },
@@ -532,7 +535,7 @@
             // load a resource
             loader.load(
                 // resource URL
-                'Models/bridge.obj',
+                'https://scanunicco.github.io/Boat-Race/Models/bridge.obj',
                 // called when resource is loaded
                 function(object) {
 
@@ -562,7 +565,7 @@
             // load a resource
             loader.load(
                 // resource URL
-                'Models/bridge2.obj',
+                'https://scanunicco.github.io/Boat-Race/Models/bridge2.obj',
                 // called when resource is loaded
                 function(object) {
 
@@ -594,7 +597,7 @@ var counter = 0;
                 // load a resource
                 loader.load(
                     // resource URL
-                    'Models/railing.obj',
+                    'https://scanunicco.github.io/Boat-Race/Models/railing.obj',
                     // called when resource is loaded
                     function(object) {
 
@@ -810,28 +813,22 @@ var counter = 0;
                 controls.getObject().position.y += velocity.y * delta;
                 controls.getObject().position.z += velocity.z * delta;
                 
-                /*alert("about to check collision");
-                alert(boat.children[0]);
-                alert(boat.children[1]);
-                alert(boat.children[2]);
-                alert(boat.children[0].name);
-                alert(boat.children[0].vertices);
-                alert(boat.children[0].geometry);*/
 
                 
-                var boatGeo = boat.children[0].geometry;/*
-                alert(boatGeo.isBufferGeometry);
-                alert(boatGeo.vertices.length);
-                alert(boatGeo.attributes.position[0].length);*/
-                for (var vertexIndex = 0; vertexIndex < boatGeo.geometry.vertices.length; vertexIndex++) { 
-                    var localVertex = boatGeo.geometry.vertices[vertexIndex].clone();
-                    var globalVertex = boatGeo.matrix.multiplyVector3(localVertex);
-                    var directionVector = globalVertex.subSelf( boatGeo.position );
-                    var ray = new THREE.Ray( boatGeo.position, directionVector.clone().normalize() );
+                //var boatGeo = new THREE.Geometry().fromBufferGeometry(boat.children[0].geometry);
+
+                var collidableMeshList = [bridge, bridge2];
+
+                for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
+                    //console.log("oof"); 
+                    var localVertex = boat.geometry.vertices[vertexIndex].clone();
+                    var globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
+                    directionVector.subVectors(globalVertex, boat.position);
+                    var ray = new THREE.Raycaster( boat.position, directionVector.clone().normalize() );
                     var collisionResults = ray.intersectObjects( collidableMeshList );
                     if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) 
                     {
-                        alert("Collision!");
+                        console.log("Collision!");
                     }
                 }
 
