@@ -512,9 +512,11 @@
 
                     scene.add(object);
                     object.rotation.x = Math.PI / -2;
-                    object.scale.set(.1, .1, .1);
+
+                    object.scale.set(10, 10, 10);
                     object.position.y = 4.5;
                     object.geometry = new THREE.Geometry().fromBufferGeometry(object.children[0].geometry);
+                    //object.rotation.y = Math.PI / 2;
                     boat = object;
 
                 },
