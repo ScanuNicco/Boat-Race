@@ -653,7 +653,7 @@
 
 			var collidableMeshList = scene.children;
 
-			collidableMeshList.remove(collidableMeshList.map((item) => {return item.name;}).indexOf("water"));
+			collidableMeshList.splice(collidableMeshList.map((item) => {return item.name;}).indexOf("water"), 1);
 
 		}
 		beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
