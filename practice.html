@@ -337,6 +337,7 @@
 					fog: scene.fog !== undefined
 				}
 			);
+			water.name = "water";
 			water.rotation.x = -Math.PI / 2;
 			scene.add(water);
 			var sky = new THREE.Sky();
@@ -650,6 +651,10 @@
 
 			//alert("init over");
 
+			var collidableMeshList = scene.children;
+
+			collidableMeshList.remove(collidableMeshList.map((item) => {return item.name;}).indexOf("water"));
+
 		}
 		beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
 		var beeMaterial = new THREE.MeshBasicMaterial({
@@ -824,7 +829,7 @@
 
 				//var boatGeo = new THREE.Geometry().fromBufferGeometry(boat.children[0].geometry);
 
-				var collidableMeshList = [bridge, bridge2];
+				
 
 				for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
 					//console.log("oof"); 
