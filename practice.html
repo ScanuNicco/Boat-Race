@@ -840,7 +840,7 @@
 					var localVertex = boat.geometry.vertices[vertexIndex].clone();
 					var globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
 					directionVector.subVectors(globalVertex, boat.position);
-					var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize());
+					var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
 					var collisionResults = ray.intersectObjects(collidableMeshList);
 					if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
 						console.log("Collision!");
