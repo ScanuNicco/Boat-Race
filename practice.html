@@ -187,6 +187,8 @@
 		var turnRight = false;
 		var canJump = false;
 
+		var collidableMeshList; //Meshes that can be collided with, initially everything but the water
+
 		var prevTime = performance.now();
 		var velocity = new THREE.Vector3();
 		var acceleration = new THREE.Vector3();
@@ -651,7 +653,7 @@
 
 			//alert("init over");
 
-			var collidableMeshList = scene.children;
+			collidableMeshList = scene.children;
 
 			collidableMeshList.splice(collidableMeshList.map((item) => {return item.name;}).indexOf("water"), 1);
 
