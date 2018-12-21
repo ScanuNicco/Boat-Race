@@ -554,7 +554,7 @@
 					object.position.z = -35;
 					bridge = object;
 
-					collidableMeshList += bridge.children[0];
+					collidableMeshList.push(bridge.children[0]);
 
 				},
 				// called when loading is in progresses
@@ -586,7 +586,7 @@
 					object.position.y = 20;
 					bridge2 = object;
 
-					collidableMeshList += bridge2.children[0];
+					collidableMeshList.push(bridge2.children[0]);
 
 				},
 				// called when loading is in progresses
