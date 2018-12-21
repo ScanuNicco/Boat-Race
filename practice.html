@@ -187,7 +187,7 @@
 		var turnRight = false;
 		var canJump = false;
 
-		var collidableMeshList; //Meshes that can be collided with, initially everything but the water
+		var collidableMeshList = []; //Meshes that can be collided with, initially everything but the water
 
 		var prevTime = performance.now();
 		var velocity = new THREE.Vector3();
@@ -554,6 +554,8 @@
 					object.position.z = -35;
 					bridge = object;
 
+					collidableMeshList += bridge.children[0];
+
 				},
 				// called when loading is in progresses
 				function(xhr) {
@@ -583,6 +585,8 @@
 					object.position.z = -30;
 					object.position.y = 20;
 					bridge2 = object;
+
+					collidableMeshList += bridge2.children[0];
 
 				},
 				// called when loading is in progresses
@@ -653,8 +657,7 @@
 
 			//alert("init over");
 
-			collidableMeshList = bridge.children;
-			collidableMeshList += bridge2.children[0];
+			
 
 		}
 		beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
