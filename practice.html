@@ -653,9 +653,7 @@
 
 			//alert("init over");
 
-			collidableMeshList = scene.children;
-
-			collidableMeshList.splice(collidableMeshList.map((item) => {return item.name;}).indexOf("water"), 1);
+			collidableMeshList = bridge.children.concat(bridge2.children);
 
 		}
 		beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
