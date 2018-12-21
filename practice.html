@@ -653,7 +653,8 @@
 
 			//alert("init over");
 
-			collidableMeshList = bridge.children.concat(bridge2.children);
+			collidableMeshList = bridge.children;
+			collidableMeshList += bridge2.children[0];
 
 		}
 		beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
