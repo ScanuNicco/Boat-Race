@@ -415,9 +415,12 @@
 			// objects
 
 			boxGeometry = new THREE.BoxBufferGeometry(24, 12, 24);
-			boxGeometry = boxGeometry.toNonIndexed(); // ensure e5ch face has unique vertices
+			boxGeometry = boxGeometry.toNonIndexed(); // ensure each face has unique vertices
+						middleGeometry = new THREE.BoxBufferGeometry(24 * 60, 12, 24 * 20);
+			middleGeometry = middleGeometry.toNonIndexed(); // ensure each face has unique vertices
 
 			position = boxGeometry.attributes.position;
+			midPosition = middleGeometry.attributes.position;
 			colors = [];
 
 			for (var i = 0, l = position.count; i < l; i++) {
@@ -428,10 +431,13 @@
 			}
 
 			boxGeometry.addAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
 			sandTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/brick.jpg");
+			middleMaterial = new THREE.MeshBasicMaterial({
+						map: sandTexture
+					});
+
 			//Middle Block
-			for (var h = -20; h < 40; h++) {
+			/*for (var h = -20; h < 40; h++) {
 				for (var j = 1; j < 20; j++) {
 					boxMaterial = new THREE.MeshBasicMaterial({
 						map: sandTexture
@@ -444,9 +450,15 @@
 					objects.push(box);
 				}
 			}
+			var middle = new THREE.Mesh(middleGeometry, middleMaterial);
+								middle.position.x = 10 * 24;
+					middle.position.z = 10 * 24;
+					middle.position.y = 4;
+					scene.add(middle);
+					objects.push(middle);
 
 			//Right Side
-			for (var h = -35; h < 43; h++) {
+			/*for (var h = -35; h < 43; h++) {
 				for (var j = -19; j < -2; j++) {
 					boxMaterial = new THREE.MeshBasicMaterial({
 						map: sandTexture
@@ -459,6 +471,13 @@
 					objects.push(box);
 				}
 			}
+			
+						var right = new THREE.Mesh(middleGeometry, middleMaterial);
+								right.position.x = 10 * 24;
+					right.position.z = -12 * 24;
+					right.position.y = 4;
+					scene.add(right);
+					objects.push(right);
 
 			//Above
 			for (var h = 43; h < 60; h++) {
@@ -503,7 +522,7 @@
 					scene.add(box);
 					objects.push(box);
 				}
-			}
+			}*/
 			//alert("point 7");
 			// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -- LOADERS -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			// instantiate a loader
@@ -607,6 +626,42 @@
 			var fenceMaterial = new THREE.MeshPhongMaterial({
 				color: 0x555555
 			});
+			
+						// load a resource
+			loader.load(
+				// resource URL
+				'Models/track.obj',
+				// called when resource is loaded
+				function(object) {
+
+					scene.add(object);
+					object.scale.set(150, 150, 150);
+					object.position.x = 200;
+					object.position.z = 625;
+					object.position.y = 0;
+					bridge2 = object;
+
+					collidableMeshList.push(bridge2.children[0]);
+
+				},
+				// called when loading is in progresses
+				function(xhr) {
+
+					console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+				},
+				// called when loading has errors
+				function(error) {
+
+					console.log('An error happened');
+
+				}
+			);
+
+			var counter = 0;
+			var fenceMaterial = new THREE.MeshPhongMaterial({
+				color: 0x555555
+			});/*
 			for (var i = 0; i <= 10; i++) {
 				// load a resource
 				loader2.load(
@@ -638,7 +693,7 @@
 
 					}
 				);
-			}
+			}*/
 
 			//alert("point 8");
 			//
