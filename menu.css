@@ -20,7 +20,8 @@ button {
 	background: #0095DD;
 	border: none;
 	border-radius: 5px;
+	cursor: pointer;
 }
 #playContent {
-    margin:350px;
+    margin-top:30%;
 }
