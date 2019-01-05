@@ -22,6 +22,6 @@ button {
 	border-radius: 5px;
 	cursor: pointer;
 }
-#playContent {
+#playContent, #locSelect, #trackSelect {
     margin-top:30%;
 }

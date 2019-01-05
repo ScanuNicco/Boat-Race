@@ -35,7 +35,7 @@
 	<script src="Three/OBJLoader.js"></script>
     <script>
 		var mode = "";
-		var location = "";
+		var loc = "";
 		function selectMode(modeName){
 			mode = modeName;
 			document.getElementById("playContent").style.display = "none";
@@ -43,13 +43,13 @@
 		}
 		
 		function selectLocation(locName){
-			location = locName;
+			loc = locName;
 			document.getElementById("locSelect").style.display = "none";
-			document.getElementById("levSelect").style.display = "block";
+			document.getElementById("trackSelect").style.display = "block";
 		}
 		
 		function go(track){
-			window.location.href = mode + ".html/?location=" + location + "&track=" + track;
+			window.location.href = mode + ".html?location=" + loc + "&track=" + track;
 		}
 		/*
         function loadBoat() {
