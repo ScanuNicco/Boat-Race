@@ -558,7 +558,7 @@
 
 				}
 			);
-
+/*
 			// load a resource
 			loader.load(
 				// resource URL
@@ -627,7 +627,7 @@
 				color: 0x555555
 			});
 			
-						// load a resource
+				*/		// load a resource
 			loader.load(
 				// resource URL
 				'Models/track.obj',
@@ -638,7 +638,42 @@
 					object.scale.set(150, 150, 150);
 					object.position.x = 200;
 					object.position.z = 625;
-					object.position.y = 0;
+					object.position.y = -5;
+					bridge2 = object;
+
+					collidableMeshList.push(bridge2.children[0]);
+
+				},
+				// called when loading is in progresses
+				function(xhr) {
+
+					console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+				},
+				// called when loading has errors
+				function(error) {
+
+					console.log('An error happened');
+
+				}
+			);
+
+			var counter = 0;
+			var fenceMaterial = new THREE.MeshPhongMaterial({
+				color: 0x555555
+			});
+			
+						loader.load(
+				// resource URL
+				'Models/trackBridges.obj',
+				// called when resource is loaded
+				function(object) {
+
+					scene.add(object);
+					object.scale.set(150, 150, 150);
+					object.position.x = 200;
+					object.position.z = 625;
+					object.position.y = -5;
 					bridge2 = object;
 
 					collidableMeshList.push(bridge2.children[0]);
