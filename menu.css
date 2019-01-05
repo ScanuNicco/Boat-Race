@@ -25,3 +25,8 @@ button {
 #playContent, #locSelect, #trackSelect {
     margin-top:30%;
 }
+
+#background {
+	position: fixed;
+	width: 100%;
+}
