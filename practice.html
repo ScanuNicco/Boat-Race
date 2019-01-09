@@ -8,6 +8,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="game.css" type="text/css" />
 </head>
 
 <body>
@@ -20,107 +21,6 @@
     <script src="Three/OBMLoader.min.js"></script>
     <script src="https://threejs.org/examples/js/objects/Water.js"></script>
     <script src="https://threejs.org/examples/js/objects/Sky.js"></script>
-
-    <style>
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-
-        body {
-            background-color: #ffffff;
-            margin: 0;
-            overflow: hidden;
-            font-family: arial;
-        }
-
-        #blocker {
-
-            position: absolute;
-
-            width: 100%;
-            height: 100%;
-
-            background-color: rgba(0, 0, 0, 0.5);
-
-        }
-
-        #menu {
-            width: 300px;
-            height: 500px;
-            background: #dddddd;
-            text-align: center;
-            position: fixed;
-            top: calc(50% - 250px);
-            left: calc(50% - 150px);
-        }
-
-        .window {
-            width: 500px;
-            height: 500px;
-            background: #dddddd;
-            text-align: center;
-            position: fixed;
-            top: calc(50% - 250px);
-            left: calc(50% - 250px);
-        }
-
-        #died {
-            background: rgba(255, 0, 0, .4);
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            padding-top: 20%;
-            text-align: center;
-            color: white;
-            display: none;
-        }
-
-        button {
-            margin: 5px;
-            padding: 10px;
-            color: white;
-            font-size: 30px;
-            background: #ed2828;
-            border: none;
-            border-radius: 2px;
-        }
-
-        h1 {
-            font-size: 80px;
-        }
-
-        #timerDisplay {
-            margin: auto;
-            font-size: 28px;
-            padding: 2px;
-            float: left;
-            border-bottom: solid white 5px;
-        }
-
-        #speedDisplay {
-            float: right;
-            font-size: 28px;
-            padding: 2px;
-        }
-
-        #lapsDisplay {
-            font-size: 28px;
-            padding: 2px;
-        }
-
-        #loading {
-            z-index: 100;
-            background: rgba(255, 255, 255, 1);
-            height: 80%;
-            width: 100%;
-            position: fixed;
-            text-align: center;
-            display: block;
-        }
-
-    </style>
 
     <div id="blocker">
         <div id="loading" onclick="controls.lock()">
@@ -172,7 +72,10 @@
         <div id="speedDisplay">0</div>
         <div id="lapsDisplay"></div>
     </div>
-
+    <div id="notifyContainer">
+        <h2 id="notifyHeader">Header</h2>
+        <h3 id="notifyText">Text</h3>
+    </div>
     <script>
         function getUrlVars() {
             var vars = {};
@@ -219,6 +122,8 @@
         var lapMSeconds = 0;
         var lapSeconds = 0;
         var lapMinutes = 0;
+        var bestLap = 0;
+        var bestString = "";
 
         var directionVector = new THREE.Vector3(); //used in the collision detection later
         //var timer = window.setInterval(runTimer, 1);
@@ -842,7 +747,7 @@
                 lapMinutes = Math.floor(lapMSeconds / 60000)
 
                 var lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
-                document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString;
+                document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString + "<br>Best Lap: " + bestString;
             }
         }
 
@@ -870,6 +775,23 @@
 
         function canFinish() {
             canFinishLap = true;
+        }
+
+        function notify(header, paragraph) {
+            document.getElementById("notifyHeader").innerHTML = header;
+            document.getElementById("notifyText").innerHTML = paragraph;
+            document.getElementById("notifyContainer").style.left = "0px";
+            setTimeout(closeNotify, 5000);
+        }
+
+        function closeNotify() {
+            document.getElementById("notifyContainer").style.left = "calc(-45% - 30px)";
+        }
+
+        function milToMin(millis) {
+            var minutes = Math.floor(millis / 60000);
+            var seconds = ((millis % 60000) / 1000).toFixed(0);
+            return minutes + "." + (seconds < 10 ? '0' : '') + seconds;
         }
 
 
@@ -916,6 +838,15 @@
                 if (boat.position.x < 10 && boat.position.x > -10) {
                     if (boat.position.z < 0 && boat.position.z > -40) {
                         if (canFinishLap) {
+                            if (laps == 1) {
+                                bestLap = lapMSeconds;
+                            } else {
+                                if (lapMSeconds < bestLap) {
+                                    bestLap = lapMSeconds;
+                                    bestString = milToMin(lapMSeconds) + "." + lapHundredthSeconds;
+                                    notify("New Best Lap!", "Your time was " + bestString + ".");
+                                }
+                            }
                             lapMSeconds = 0;
                             canFinishLap = false;
                             laps++;
@@ -970,7 +901,6 @@
             water.material.uniforms.time.value += 1.0 / 60.0;
             renderer.render(scene, camera);
         }
-
     </script>
 </body>
 
