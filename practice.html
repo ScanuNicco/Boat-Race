@@ -123,7 +123,9 @@
         var lapSeconds = 0;
         var lapMinutes = 0;
         var bestLap = 0;
-        var bestString = "";
+        var bestString = "None Yet";
+        var lapString = "";
+        var lastLap = "None Yet";
 
         var directionVector = new THREE.Vector3(); //used in the collision detection later
         //var timer = window.setInterval(runTimer, 1);
@@ -746,8 +748,8 @@
 
                 lapMinutes = Math.floor(lapMSeconds / 60000)
 
-                var lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
-                document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString + "<br>Best Lap: " + bestString;
+                lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
+                document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString + "<br>Last Lap: " + lastLap + "<br>Best Lap: " + bestString;
             }
         }
 
@@ -845,10 +847,11 @@
                             } else {
                                 if (lapMSeconds < bestLap) {
                                     bestLap = lapMSeconds;
-                                    bestString = milToMin(lapMSeconds) + "." + lapHundredthSeconds;
+                                    bestString = milToMin(lapMSeconds) + "." + fixTime(lapHundredthSeconds);
                                     notify("New Best Lap!", "Your time was " + bestString + ".");
                                 }
                             }
+                            lastLap = lapString;
                             lapMSeconds = 0;
                             canFinishLap = false;
                             document.getElementById("lapsDisplay").innerText = "Laps: " + laps;
