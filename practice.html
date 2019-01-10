@@ -87,7 +87,7 @@
 
         var loc = getUrlVars()["location"];
         var track = getUrlVars()["track"];
-        alert("Location: " + loc + ", Track: " + track);
+        notify("Location: " + loc,"Track number " + track);
         var camera, scene, renderer, controls;
 
         var objects = [];
@@ -548,7 +548,7 @@
             				*/ // load a resource
             loader.load(
                 // resource URL
-                'Models/track.obj',
+                'Models/venice1.obj',
                 // called when resource is loaded
                 function(object) {
 
