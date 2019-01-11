@@ -8,6 +8,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" href="game.css" type="text/css" />
 </head>
 
 <body>
@@ -20,107 +21,6 @@
 	<script src="Three/OBMLoader.min.js"></script>
 	<script src="https://threejs.org/examples/js/objects/Water.js"></script>
 	<script src="https://threejs.org/examples/js/objects/Sky.js"></script>
-
-	<style>
-		html,
-		body {
-			width: 100%;
-			height: 100%;
-		}
-
-		body {
-			background-color: #ffffff;
-			margin: 0;
-			overflow: hidden;
-			font-family: arial;
-		}
-
-		#blocker {
-
-			position: absolute;
-
-			width: 100%;
-			height: 100%;
-
-			background-color: rgba(0, 0, 0, 0.5);
-
-		}
-
-		#menu {
-			width: 300px;
-			height: 500px;
-			background: #dddddd;
-			text-align: center;
-			position: fixed;
-			top: calc(50% - 250px);
-			left: calc(50% - 150px);
-		}
-
-		.window {
-			width: 500px;
-			height: 500px;
-			background: #dddddd;
-			text-align: center;
-			position: fixed;
-			top: calc(50% - 250px);
-			left: calc(50% - 250px);
-		}
-
-		#died {
-			background: rgba(255, 0, 0, .4);
-			position: fixed;
-			width: 100%;
-			height: 100%;
-			padding-top: 20%;
-			text-align: center;
-			color: white;
-			display: none;
-		}
-
-		button {
-			margin: 5px;
-			padding: 10px;
-			color: white;
-			font-size: 30px;
-			background: #ed2828;
-			border: none;
-			border-radius: 2px;
-		}
-
-		h1 {
-			font-size: 80px;
-		}
-
-		#timerDisplay {
-			margin: auto;
-			font-size: 28px;
-			padding: 2px;
-			float: left;
-			border-bottom: solid white 5px;
-		}
-
-		#speedDisplay {
-			float: right;
-			font-size: 28px;
-			padding: 2px;
-		}
-
-		#lapsDisplay {
-			font-size: 28px;
-			padding: 2px;
-		}
-
-		#loading {
-			z-index: 100;
-			background: rgba(255, 255, 255, 1);
-			height: 80%;
-			width: 100%;
-			position: fixed;
-			text-align: center;
-			display: block;
-		}
-
-	</style>
 
 	<div id="blocker">
 		<div id="loading" onclick="controls.lock()">
@@ -172,8 +72,26 @@
 		<div id="speedDisplay">0</div>
 		<div id="lapsDisplay"></div>
 	</div>
-
+	<div id="notifyContainer">
+		<h2 id="notifyHeader">Header</h2>
+		<h3 id="notifyText">Text</h3>
+	</div>
 	<script>
+		function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+
+		var loc = getUrlVars()["location"];
+		var track = getUrlVars()["track"];
+		if (loc == null) {
+			loc = "Venice";
+			track = "1";
+		}
+		notify("Location: " + loc, "Track number " + track);
 		var camera, scene, renderer, controls;
 
 		var objects = [];
@@ -208,6 +126,10 @@
 		var lapMSeconds = 0;
 		var lapSeconds = 0;
 		var lapMinutes = 0;
+		var bestLap = 0;
+		var bestString = "None Yet";
+		var lapString = "";
+		var lastLap = "None Yet";
 
 		var directionVector = new THREE.Vector3(); //used in the collision detection later
 		//var timer = window.setInterval(runTimer, 1);
@@ -416,7 +338,7 @@
 
 			boxGeometry = new THREE.BoxBufferGeometry(24, 12, 24);
 			boxGeometry = boxGeometry.toNonIndexed(); // ensure each face has unique vertices
-						middleGeometry = new THREE.BoxBufferGeometry(24 * 60, 12, 24 * 20);
+			middleGeometry = new THREE.BoxBufferGeometry(24 * 60, 12, 24 * 20);
 			middleGeometry = middleGeometry.toNonIndexed(); // ensure each face has unique vertices
 
 			position = boxGeometry.attributes.position;
@@ -433,96 +355,96 @@
 			boxGeometry.addAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 			sandTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/brick.jpg");
 			middleMaterial = new THREE.MeshBasicMaterial({
-						map: sandTexture
-					});
+				map: sandTexture
+			});
 
 			//Middle Block
 			/*for (var h = -20; h < 40; h++) {
-				for (var j = 1; j < 20; j++) {
-					boxMaterial = new THREE.MeshBasicMaterial({
-						map: sandTexture
-					});
-					var box = new THREE.Mesh(boxGeometry, boxMaterial);
-					box.position.x = h * 24;
-					box.position.z = j * 24;
-					box.position.y = 4;
-					scene.add(box);
-					objects.push(box);
-				}
-			}
-			var middle = new THREE.Mesh(middleGeometry, middleMaterial);
-								middle.position.x = 10 * 24;
-					middle.position.z = 10 * 24;
-					middle.position.y = 4;
-					scene.add(middle);
-					objects.push(middle);
+            	for (var j = 1; j < 20; j++) {
+            		boxMaterial = new THREE.MeshBasicMaterial({
+            			map: sandTexture
+            		});
+            		var box = new THREE.Mesh(boxGeometry, boxMaterial);
+            		box.position.x = h * 24;
+            		box.position.z = j * 24;
+            		box.position.y = 4;
+            		scene.add(box);
+            		objects.push(box);
+            	}
+            }
+            var middle = new THREE.Mesh(middleGeometry, middleMaterial);
+            					middle.position.x = 10 * 24;
+            		middle.position.z = 10 * 24;
+            		middle.position.y = 4;
+            		scene.add(middle);
+            		objects.push(middle);
 
-			//Right Side
-			/*for (var h = -35; h < 43; h++) {
-				for (var j = -19; j < -2; j++) {
-					boxMaterial = new THREE.MeshBasicMaterial({
-						map: sandTexture
-					});
-					var box = new THREE.Mesh(boxGeometry, boxMaterial);
-					box.position.x = h * 24;
-					box.position.z = j * 24;
-					box.position.y = 4;
-					scene.add(box);
-					objects.push(box);
-				}
-			}
+            //Right Side
+            /*for (var h = -35; h < 43; h++) {
+            	for (var j = -19; j < -2; j++) {
+            		boxMaterial = new THREE.MeshBasicMaterial({
+            			map: sandTexture
+            		});
+            		var box = new THREE.Mesh(boxGeometry, boxMaterial);
+            		box.position.x = h * 24;
+            		box.position.z = j * 24;
+            		box.position.y = 4;
+            		scene.add(box);
+            		objects.push(box);
+            	}
+            }
 			
-						var right = new THREE.Mesh(middleGeometry, middleMaterial);
-								right.position.x = 10 * 24;
-					right.position.z = -12 * 24;
-					right.position.y = 4;
-					scene.add(right);
-					objects.push(right);
+            			var right = new THREE.Mesh(middleGeometry, middleMaterial);
+            					right.position.x = 10 * 24;
+            		right.position.z = -12 * 24;
+            		right.position.y = 4;
+            		scene.add(right);
+            		objects.push(right);
 
-			//Above
-			for (var h = 43; h < 60; h++) {
-				for (var j = -20; j < 40; j++) {
-					boxMaterial = new THREE.MeshBasicMaterial({
-						map: sandTexture
-					});
-					var box = new THREE.Mesh(boxGeometry, boxMaterial);
-					box.position.x = h * 24;
-					box.position.z = j * 24;
-					box.position.y = 4;
-					scene.add(box);
-					objects.push(box);
-				}
-			}
+            //Above
+            for (var h = 43; h < 60; h++) {
+            	for (var j = -20; j < 40; j++) {
+            		boxMaterial = new THREE.MeshBasicMaterial({
+            			map: sandTexture
+            		});
+            		var box = new THREE.Mesh(boxGeometry, boxMaterial);
+            		box.position.x = h * 24;
+            		box.position.z = j * 24;
+            		box.position.y = 4;
+            		scene.add(box);
+            		objects.push(box);
+            	}
+            }
 
-			//Left Side
-			for (var h = -23; h < 43; h++) {
-				for (var j = 23; j < 40; j++) {
-					boxMaterial = new THREE.MeshBasicMaterial({
-						map: sandTexture
-					});
-					var box = new THREE.Mesh(boxGeometry, boxMaterial);
-					box.position.x = h * 24;
-					box.position.z = j * 24;
-					box.position.y = 4;
-					scene.add(box);
-					objects.push(box);
-				}
-			}
+            //Left Side
+            for (var h = -23; h < 43; h++) {
+            	for (var j = 23; j < 40; j++) {
+            		boxMaterial = new THREE.MeshBasicMaterial({
+            			map: sandTexture
+            		});
+            		var box = new THREE.Mesh(boxGeometry, boxMaterial);
+            		box.position.x = h * 24;
+            		box.position.z = j * 24;
+            		box.position.y = 4;
+            		scene.add(box);
+            		objects.push(box);
+            	}
+            }
 
-			// Behind
-			for (var h = -43; h < -23; h++) {
-				for (var j = -2; j < 43; j++) {
-					boxMaterial = new THREE.MeshBasicMaterial({
-						map: sandTexture
-					});
-					var box = new THREE.Mesh(boxGeometry, boxMaterial);
-					box.position.x = h * 24;
-					box.position.z = j * 24;
-					box.position.y = 4;
-					scene.add(box);
-					objects.push(box);
-				}
-			}*/
+            // Behind
+            for (var h = -43; h < -23; h++) {
+            	for (var j = -2; j < 43; j++) {
+            		boxMaterial = new THREE.MeshBasicMaterial({
+            			map: sandTexture
+            		});
+            		var box = new THREE.Mesh(boxGeometry, boxMaterial);
+            		box.position.x = h * 24;
+            		box.position.z = j * 24;
+            		box.position.y = 4;
+            		scene.add(box);
+            		objects.push(box);
+            	}
+            }*/
 			//alert("point 7");
 			// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -- LOADERS -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			// instantiate a loader
@@ -558,114 +480,79 @@
 
 				}
 			);
-/*
-			// load a resource
-			loader.load(
-				// resource URL
-				'Models/bridge.obj',
-				// called when resource is loaded
-				function(object) {
-
-					scene.add(object);
-					object.rotation.x = Math.PI / -2;
-					object.rotation.z = Math.PI / -2;
-					//object.scale.set(.1, .1, .1);
-					object.position.z = -35;
-					bridge = object;
-
-					collidableMeshList.push(bridge.children[0]);
-
-				},
-				// called when loading is in progresses
-				function(xhr) {
-
-					console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-				},
-				// called when loading has errors
-				function(error) {
-
-					console.log('An error happened');
-
-				}
-			);
-
-
-			// load a resource
-			loader.load(
-				// resource URL
-				'Models/bridge2.obj',
-				// called when resource is loaded
-				function(object) {
-
-					scene.add(object);
-					object.scale.set(15, 15, 15);
-					object.position.x = 400;
-					object.position.z = -30;
-					object.position.y = 20;
-					bridge2 = object;
-
-					collidableMeshList.push(bridge2.children[0]);
-
-				},
-				// called when loading is in progresses
-				function(xhr) {
-
-					console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-				},
-				// called when loading has errors
-				function(error) {
-
-					console.log('An error happened');
-
-				}
-			);
-
-			var counter = 0;
-			var fenceMaterial = new THREE.MeshPhongMaterial({
-				color: 0x555555
-			});
-			
-				*/		// load a resource
-			loader.load(
-				// resource URL
-				'Models/track.obj',
-				// called when resource is loaded
-				function(object) {
-
-					scene.add(object);
-					object.scale.set(150, 150, 150);
-					object.position.x = 200;
-					object.position.z = 625;
-					object.position.y = -5;
-					bridge2 = object;
-
-					collidableMeshList.push(bridge2.children[0]);
-
-				},
-				// called when loading is in progresses
-				function(xhr) {
-
-					console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-				},
-				// called when loading has errors
-				function(error) {
-
-					console.log('An error happened');
-
-				}
-			);
-
-			var counter = 0;
-			var fenceMaterial = new THREE.MeshPhongMaterial({
-				color: 0x555555
-			});
-			
+			/*
+						// load a resource
 						loader.load(
+							// resource URL
+							'Models/bridge.obj',
+							// called when resource is loaded
+							function(object) {
+
+								scene.add(object);
+								object.rotation.x = Math.PI / -2;
+								object.rotation.z = Math.PI / -2;
+								//object.scale.set(.1, .1, .1);
+								object.position.z = -35;
+								bridge = object;
+
+								collidableMeshList.push(bridge.children[0]);
+
+							},
+							// called when loading is in progresses
+							function(xhr) {
+
+								console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+							},
+							// called when loading has errors
+							function(error) {
+
+								console.log('An error happened');
+
+							}
+						);
+
+
+						// load a resource
+						loader.load(
+							// resource URL
+							'Models/bridge2.obj',
+							// called when resource is loaded
+							function(object) {
+
+								scene.add(object);
+								object.scale.set(15, 15, 15);
+								object.position.x = 400;
+								object.position.z = -30;
+								object.position.y = 20;
+								bridge2 = object;
+
+								collidableMeshList.push(bridge2.children[0]);
+
+							},
+							// called when loading is in progresses
+							function(xhr) {
+
+								console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+							},
+							// called when loading has errors
+							function(error) {
+
+								console.log('An error happened');
+
+							}
+						);
+
+						var counter = 0;
+						var fenceMaterial = new THREE.MeshPhongMaterial({
+							color: 0x555555
+						});
+						
+							*/ // load a resource
+			loader.load(
 				// resource URL
-				'Models/trackBridges.obj',
+				'Models/' + loc + track + '.obj',
 				// called when resource is loaded
 				function(object) {
 
@@ -696,39 +583,40 @@
 			var counter = 0;
 			var fenceMaterial = new THREE.MeshPhongMaterial({
 				color: 0x555555
-			});/*
-			for (var i = 0; i <= 10; i++) {
-				// load a resource
-				loader2.load(
-					// resource URL
-					'Models/railing.obm',
-					// called when resource is loaded
-					function(object) {
+			});
+			/*
+						for (var i = 0; i <= 10; i++) {
+							// load a resource
+							loader2.load(
+								// resource URL
+								'Models/railing.obm',
+								// called when resource is loaded
+								function(object) {
 
 
-						object.scale.set(3, 3, 3);
-						object.position.x = counter * 45;
-						console.log("added object at " + (counter));
-						object.position.z = 20;
-						object.position.y = 10;
-						object.material = fenceMaterial;
-						scene.add(object);
-						counter++;
-					},
-					// called when loading is in progresses
-					function(xhr) {
+									object.scale.set(3, 3, 3);
+									object.position.x = counter * 45;
+									console.log("added object at " + (counter));
+									object.position.z = 20;
+									object.position.y = 10;
+									object.material = fenceMaterial;
+									scene.add(object);
+									counter++;
+								},
+								// called when loading is in progresses
+								function(xhr) {
 
-						console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+									console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 
-					},
-					// called when loading has errors
-					function(error) {
+								},
+								// called when loading has errors
+								function(error) {
 
-						console.log('An error happened');
+									console.log('An error happened');
 
-					}
-				);
-			}*/
+								}
+							);
+						}*/
 
 			//alert("point 8");
 			//
@@ -747,7 +635,7 @@
 
 			//alert("init over");
 
-			
+
 
 		}
 		beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
@@ -829,8 +717,8 @@
 
 				lapMinutes = Math.floor(lapMSeconds / 60000)
 
-				var lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
-				document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString;
+				lapString = fixTime(lapMinutes) + "." + fixTime(lapSeconds) + "." + fixTime(lapHundredthSeconds);
+				document.getElementById("timerDisplay").innerHTML = "Current Lap: " + lapString + "<br>Last Lap: " + lastLap + "<br>Best Lap: " + bestString;
 			}
 		}
 
@@ -858,6 +746,23 @@
 
 		function canFinish() {
 			canFinishLap = true;
+		}
+
+		function notify(header, paragraph) {
+			document.getElementById("notifyHeader").innerHTML = header;
+			document.getElementById("notifyText").innerHTML = paragraph;
+			document.getElementById("notifyContainer").style.left = "0px";
+			setTimeout(closeNotify, 5000);
+		}
+
+		function closeNotify() {
+			document.getElementById("notifyContainer").style.left = "calc(-45% - 30px)";
+		}
+
+		function milToMin(millis) {
+			var minutes = Math.floor(millis / 60000);
+			var seconds = ((millis % 60000) / 1000).toFixed(0);
+			return minutes + "." + (seconds < 10 ? '0' : '') + seconds;
 		}
 
 
@@ -904,9 +809,20 @@
 				if (boat.position.x < 10 && boat.position.x > -10) {
 					if (boat.position.z < 0 && boat.position.z > -40) {
 						if (canFinishLap) {
+							laps++;
+							if (laps == 1) {
+								bestLap = lapMSeconds;
+								bestString = milToMin(lapMSeconds) + "." + lapHundredthSeconds;
+							} else {
+								if (lapMSeconds < bestLap) {
+									bestLap = lapMSeconds;
+									bestString = milToMin(lapMSeconds) + "." + fixTime(lapHundredthSeconds);
+									notify("New Best Lap!", "Your time was " + bestString + ".");
+								}
+							}
+							lastLap = lapString;
 							lapMSeconds = 0;
 							canFinishLap = false;
-							laps++;
 							document.getElementById("lapsDisplay").innerText = "Laps: " + laps;
 							setTimeout(canFinish, 1000);
 						}
@@ -923,7 +839,7 @@
 
 				//var boatGeo = new THREE.Geometry().fromBufferGeometry(boat.children[0].geometry);
 
-				
+
 
 				for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
 					//console.log("oof"); 
@@ -958,7 +874,6 @@
 			water.material.uniforms.time.value += 1.0 / 60.0;
 			renderer.render(scene, camera);
 		}
-
 	</script>
 </body>
 

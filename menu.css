@@ -21,7 +21,14 @@ button {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+    box-shadow: 15px 15px 5px rgba(0, 0, 0, .7);
 }
-#playContent {
+#playContent, #locSelect, #trackSelect {
     margin-top:30%;
 }
+
+#background {
+	position: fixed;
+	width: 100%;
+}
+ 

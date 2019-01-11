@@ -1,0 +1,117 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    overflow: hidden;
+    font-family: arial;
+}
+
+#blocker {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+#menu {
+    width: 300px;
+    height: 500px;
+    background: #dddddd;
+    text-align: center;
+    position: fixed;
+    top: calc(50% - 250px);
+    left: calc(50% - 150px);
+}
+
+.window {
+    width: 500px;
+    height: 500px;
+    background: #dddddd;
+    text-align: center;
+    position: fixed;
+    top: calc(50% - 250px);
+    left: calc(50% - 250px);
+}
+
+#died {
+    background: rgba(255, 0, 0, .4);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding-top: 20%;
+    text-align: center;
+    color: white;
+    display: none;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 30px;
+    background: #ed2828;
+    border: none;
+    border-radius: 2px;
+}
+
+h1 {
+    font-size: 80px;
+}
+
+#timerDisplay {
+    margin: auto;
+    font-size: 28px;
+    color: black;
+    float: left;
+    border-bottom: solid white 5px;
+    position: fixed;
+    height: 100px;
+    background: grey;
+    padding: 15px;
+    border-bottom-color: black;
+    border-bottom-right-radius: 15px;
+}
+
+#speedDisplay {
+    float: right;
+    font-size: 28px;
+    padding: 2px;
+}
+
+#lapsDisplay {
+    font-size: 28px;
+    padding: 2px;
+
+}
+
+#loading {
+    z-index: 100;
+    background: rgba(255, 255, 255, 1);
+    height: 80%;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    display: block;
+}
+
+#notifyContainer{
+    position: fixed;
+    top: 150px;
+    height: 150px;
+    width: 45%;
+    background: white;
+    padding: 15px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    transition-duration: 1s;
+    left: calc(-45% - 30px);
+}

@@ -11,17 +11,20 @@
 </head>
 
 <body>
+	<img src="Images/background.png" id="background">
 	<div class="center">
 		<img src="Images/Logo.png" id="logo">
 		<div id="playContent">
 			<button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Singleplayer</button><br>
 			<button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Multiplayer</button><br>
 			<button onclick="selectMode('practice');">Practice Course</button>
+            <br>
+            <button onclick="location.href = 'roadmap.html'">Roadmap</button>
 		</div>
 		<div id="locSelect" style="display: none">
 			<h2>Select A Location</h2>
 			<button style="background: grey; cursor: not-allowed;">Amsterdam</button><br>
-			<button onclick="selectLocation('Venice')">Venice</button>
+			<button onclick="selectLocation('venice')">Venice</button>
 		</div>
 		<div id="trackSelect" style="display: none">
 			<h2>Select A Track</h2>
@@ -30,12 +33,12 @@
 			<button onclick="startGameMode(1)">Track 1 (Beginner)</button>
 		</div>
 	</div>
-	<audio src="Music/main.wav" autoplay="autoplay" loop="loop" type="audio/wav"></audio>
+	<audio src="Music/main.wav" autoplay="autoplay" loop="loop" type="audio/wav"></audio> 
 	<script src="Three/three.min.js"></script>
 	<script src="Three/OBJLoader.js"></script>
     <script>
 		var mode = "";
-		var location = "";
+		var loc = "";
 		function selectMode(modeName){
 			mode = modeName;
 			document.getElementById("playContent").style.display = "none";
@@ -43,13 +46,13 @@
 		}
 		
 		function selectLocation(locName){
-			location = locName;
+			loc = locName;
 			document.getElementById("locSelect").style.display = "none";
-			document.getElementById("levSelect").style.display = "block";
+			document.getElementById("trackSelect").style.display = "block";
 		}
 		
-		function startGameMode(track){
-			window.location.href = mode + ".html/?location=" + location + "&track=" + track;
+		function go(track){
+			window.location.href = mode + ".html?location=" + loc + "&track=" + track;
 		}
 		/*
         function loadBoat() {
