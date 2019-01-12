@@ -844,7 +844,7 @@
 					}
 				}
 
-
+				boat.rotation.z += turnDist;
 
 				controls.getObject().position.x += velocity.x * delta;
 				controls.getObject().position.y += velocity.y * delta;
@@ -899,13 +899,13 @@
 				boat.position.x = controls.getObject().position.x;
 				boat.position.z = controls.getObject().position.z;
 
-				boat.rotation.z += turnDist;
-				var turnColRes = checkCollision();
-				if (turnColRes != null) {
-					boat.rotation.z -= turnDist;
-					velocity.x -= turnColRes.face.normal.x * 30;
-					velocity.z -= turnColRes.face.normal.z * 30;
-				}
+				
+				//var turnColRes = checkCollision();
+				//if (turnColRes != null) {
+				//	boat.rotation.z -= turnDist;
+				//	velocity.x -= turnColRes.face.normal.x * 30;
+				//	velocity.z -= turnColRes.face.normal.z * 30;
+				//}
 
 				var speed = Math.floor(Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
 				document.getElementById("speedDisplay").innerText = "Speed: " + speed;
