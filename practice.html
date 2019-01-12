@@ -564,6 +564,8 @@
 					bridge2 = object;
 
 					collidableMeshList.push(bridge2.children[0]);
+					bridge2.children[0].material.transparent = true;
+					bridge2.children[0].material.opacity = 0.0;
 
 				},
 				// called when loading is in progresses
