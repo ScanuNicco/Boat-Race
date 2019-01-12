@@ -903,8 +903,8 @@
 				var turnColRes = checkCollision();
 				if (turnColRes != null) {
 					boat.rotation.z -= turnDist;
-					velocity.x += turnColRes.face.normal.x * 50;
-					velocity.z += turnColRes.face.normal.z * 50;
+					velocity.x -= turnColRes.face.normal.x * 30;
+					velocity.z -= turnColRes.face.normal.z * 30;
 				}
 
 				var speed = Math.floor(Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
