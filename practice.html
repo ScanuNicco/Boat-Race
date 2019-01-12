@@ -854,7 +854,7 @@
 						//By reducing speed and reversing direction, maybe i can make the boat bounce off of the walls instead of sticking to them
 						//Thats not how this works rag
 						controls.getObject().position.x -= directionVector.x - collisionResults[0].point.x;
-						controls.getObject().position.y -= directionVector.y - collisionResults[0].point.y;
+						controls.getObject().position.z -= directionVector.z - collisionResults[0].point.z;
 
 						var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
 						newVelocity.reflect(collisionResults[0].face.normal);
