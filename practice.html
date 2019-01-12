@@ -849,7 +849,9 @@
 					var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
 					var collisionResults = ray.intersectObjects(collidableMeshList);
 					if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
-						console.log("Collision!");
+						velocity.x = 0;
+						velocity.y = 0;
+						velocity.z = 0;
 					}
 				}
 
