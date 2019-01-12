@@ -60,9 +60,9 @@
             <h1>Options</h1>
             <h3>Music</h3>
             <label class="switch" onclick="toggleMusic()">
-  <input type="checkbox" id="musicSwitch">
-  <span class="slider round"></span>
-</label><br>
+                <input type="checkbox" id="musicSwitch">
+                <span class="slider round"></span>
+            </label><br>
             <button onclick="hide('options')">Close</button>
         </div>
         <div id="credits" class="window" style="right: 100%" onclick="setTimeout(controls.unlock, 20)">
@@ -180,11 +180,11 @@
             instructions.style.display = 'block';
             blocker.style.bottom = '0px';
             document.getElementById("loading").style.display = "none";
-/*
-            document.body.addEventListener('click', function(event) {
-                controls.lock();
+            /*
+                        document.body.addEventListener('click', function(event) {
+                            controls.lock();
 
-            }, false);*/
+                        }, false);*/
             controls.addEventListener('lock', function() {
 
                 instructions.style.display = 'block';
@@ -784,9 +784,9 @@
             var seconds = ((millis % 60000) / 1000).toFixed(0);
             return minutes + "." + (seconds < 10 ? '0' : '') + seconds;
         }
-        
-        function toggleMusic(){
-            if(document.getElementById("musicSwitch").checked){
+
+        function toggleMusic() {
+            if (document.getElementById("musicSwitch").checked) {
                 document.getElementById("backgroundMusic").play();
             } else {
                 document.getElementById("backgroundMusic").pause();
@@ -827,7 +827,6 @@
                 var vector = new THREE.Vector3(1, 0, 0);
 
                 vector.applyQuaternion(boat.quaternion);
-
                 vector.multiplyScalar(acceleration.z);
 
                 velocity.x += vector.x;
