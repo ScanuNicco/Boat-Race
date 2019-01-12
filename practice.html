@@ -851,7 +851,7 @@
 					if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
 						//By reducing speed and reversing direction, maybe i can make the boat bounce off of the walls instead of sticking to them
 						//Thats not how this works rag
-						var newVelocity = new Vector3(velocity.x, velocity.y, velocity.z);
+						var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
 						newVelocity.reflect(collisionResults[0].face.normal);
 						controls.getObject().position.x -= velocity.x * delta;
 						controls.getObject().position.y -= velocity.y * delta;
