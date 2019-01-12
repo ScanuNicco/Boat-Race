@@ -21,7 +21,13 @@ button {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-    box-shadow: 15px 15px 5px rgba(0, 0, 0, .7);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, .7);
+    transition-duration: .5s;
+}
+
+button:hover{
+    transform: scale(0.9);
+    box-shadow: 5px 5px 2px rgba(0, 0, 0, .7);
 }
 #playContent, #locSelect, #trackSelect {
     margin-top:30%;
