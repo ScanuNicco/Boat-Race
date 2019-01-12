@@ -856,12 +856,13 @@
 						controls.getObject().position.x -= directionVector.x - (collisionResults[0].point.x - boat.position.x);
 						controls.getObject().position.z -= directionVector.z - (collisionResults[0].point.z - boat.position.z);
 
-						var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
-						newVelocity.reflect(collisionResults[0].face.normal);
+						//var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
+						//newVelocity.reflect(collisionResults[0].face.normal);
 						//controls.getObject().position.x -= velocity.x * delta;
 						//controls.getObject().position.y -= velocity.y * delta;
 						//controls.getObject().position.z -= velocity.z * delta;
-						velocity = newVelocity;
+						//velocity = newVelocity;
+						velocity.reflect(collisionResults[0].face.normal);
 						controls.getObject().position.x += velocity.x * delta;
 						controls.getObject().position.y += velocity.y * delta;
 						controls.getObject().position.z += velocity.z * delta;
