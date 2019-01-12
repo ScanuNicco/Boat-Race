@@ -850,12 +850,8 @@
 					var collisionResults = ray.intersectObjects(collidableMeshList);
 					if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
 						//By reducing speed and reversing direction, maybe i can make the boat bounce off of the walls instead of sticking to them
-						velocity.x = velocity.x / 2;
-						velocity.y = velocity.y / 2;
-						velocity.z = velocity.z / 2;
-						direction.x = -direction.x;
-						direction.y = -direction.y;
-						direction.z = -direction.z;
+						//Thats not how this works rag
+						velocity = velocity.reflect(collisionResults[0].face.normal);
 					}
 				}
 
