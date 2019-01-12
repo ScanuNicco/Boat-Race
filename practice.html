@@ -849,9 +849,13 @@
 					var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
 					var collisionResults = ray.intersectObjects(collidableMeshList);
 					if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
-						velocity.x = 0;
-						velocity.y = 0;
-						velocity.z = 0;
+						//By reducing speed and reversing direction, maybe i can make the boat bounce off of the walls instead of sticking to them
+						velocity.x = velocity.x / 2;
+						velocity.y = velocity.y / 2;
+						velocity.z = velocity.z / 2;
+						direction.x = -direction.x;
+						direction.y = -direction.y;
+						direction.z = -direction.z;
 					}
 				}
 
