@@ -900,8 +900,11 @@
 				boat.position.z = controls.getObject().position.z;
 
 				boat.rotation.z += turnDist;
-				if (checkCollision() != null) {
+				var turnColRes = checkCollision();
+				if (turnColRes != null) {
 					boat.rotation.z -= turnDist;
+					velocity.x += turnColRes.face.normal.x * 50;
+					velocity.z += turnColRes.face.normal.z * 50;
 				}
 
 				var speed = Math.floor(Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
