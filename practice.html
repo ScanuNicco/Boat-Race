@@ -857,6 +857,7 @@
 				var collisionResults = checkCollision();
 
 				if (collisionResults != null) {
+					boat.rotation.z -= turnDist * 1.1;
 					var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
 					newVelocity.reflect(collisionResults.face.normal);
 					controls.getObject().position.x -= velocity.x * delta;
