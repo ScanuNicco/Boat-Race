@@ -21,6 +21,7 @@
     <script src="Three/OBMLoader.min.js"></script>
     <script src="https://threejs.org/examples/js/objects/Water.js"></script>
     <script src="https://threejs.org/examples/js/objects/Sky.js"></script>
+    <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 
     <div id="blocker">
         <div id="loading" onclick="controls.lock()">
@@ -33,7 +34,7 @@
             <h1>Boat-Race</h1>
             <h3>Game is paused</h3>
             <br>
-            <p>v1.1.41</p>
+            <p>v1.1.42</p>
             <table id="menuTable">
                 <tr>
                     <td>
@@ -108,6 +109,12 @@
             track = "1";
         }
         notify("Location: " + loc, "Track number " + track);
+	    
+	//FPS counter setup
+	var stats = new Stats();
+        stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+        document.body.appendChild( stats.dom );
+	    
         var camera, scene, renderer, controls;
 
         var objects = [];
@@ -796,9 +803,9 @@
 
         function animate() {
             //alert("starting animate");
-            requestAnimationFrame(animate);
+	    stats.begin();
             //controls.update();
-
+	    requestAnimationFrame(animate);
             if (controls.isLocked === true) {
                 //alert("point 1");
                 raycaster.ray.origin.copy(controls.getObject().position);
@@ -909,7 +916,10 @@
                 }
             }
             water.material.uniforms.time.value += 1.0 / 60.0;
+            
             renderer.render(scene, camera);
+		
+	    stats.update();
         }
 
 	</script>
