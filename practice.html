@@ -34,7 +34,7 @@
             <h1>Boat-Race</h1>
             <h3>Game is paused</h3>
             <br>
-            <p>v1.1.42</p>
+            <p>v1.1.43</p>
             <table id="menuTable">
                 <tr>
                     <td>
@@ -65,7 +65,7 @@
                 <span class="slider round"></span>
             </label><br>
 		<h3>Quality</h3><br>
-		<p>Better Preformance - <input type="range"></input> - Better Quality</p><br>
+		<p>Better Preformance - <input type="range" min="0" max="1" id="prefInput" value="0" onchange="togglePreformance()"></input> - Better Quality</p><br>
 		
             <button onclick="hide('options')">Close</button>
         </div>
@@ -578,7 +578,7 @@
             				*/ // load a resource
             loader.load(
                 // resource URL
-                'Models/' + loc + track + '.obj',
+                'Models/' + loc + track + document.getElementById('pefromanceInput').value + '.obj',
                 // called when resource is loaded
                 function(object) {
 
@@ -802,6 +802,41 @@
                 document.getElementById("backgroundMusic").pause();
             }
         }
+	
+	function togglePreformance() {
+	scene.remove(bridge2);
+	loader.load(
+                // resource URL
+                'Models/' + loc + track + document.getElementById('pefromanceInput').value + '.obj',
+                // called when resource is loaded
+                function(object) {
+
+                    scene.add(object);
+                    object.scale.set(150, 150, 150);
+                    object.position.x = 200;
+                    object.position.z = 625;
+                    object.position.y = -5;
+                    bridge2 = object;
+
+                    collidableMeshList.push(bridge2.children[0]);
+                    bridge2.children[0].material.transparent = true;
+                    bridge2.children[0].material.opacity = 0.0;
+
+                },
+                // called when loading is in progresses
+                function(xhr) {
+
+                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+                },
+                // called when loading has errors
+                function(error) {
+
+                    console.log('An error happened');
+
+                }
+            );
+	    }
 
 
         function animate() {
