@@ -64,7 +64,8 @@
                 <input type="checkbox" id="musicSwitch" checked>
                 <span class="slider round"></span>
             </label><br>
-		
+		<h3>Render Distance</h3>
+            <p> &lArr; Low &hArr; High &rArr; </p><input type="range" min="1000" max="5000" id="distInput" onchange="renderDistance()" value="1000"> 
             <button onclick="hide('options')">Close</button>
         </div>
         <div id="credits" class="window" style="right: 100%" onclick="setTimeout(controls.unlock, 20)">
@@ -799,6 +800,11 @@
             } else {
                 document.getElementById("backgroundMusic").pause();
             }
+        }
+        
+        function renderDistance(){
+            camera.far = parseInt(document.getElementById("distInput").value, 10);
+            camera.updateProjectionMatrix();
         }
 
 
