@@ -1,4 +1,4 @@
-# Boat-Race
+# Boat-Race Pre-Alpha
 A boat racing game
 
 
