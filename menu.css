@@ -16,7 +16,7 @@ button {
 	margin: 5px;
 	padding: 10px;
 	color: white;
-	font-size: 30px;
+	font-size: 50px;
 	background: #0095DD;
 	border: none;
 	border-radius: 5px;
@@ -38,3 +38,7 @@ button:hover{
 	width: 100%;
 }
  
+h2 {
+		font-size: 50px;
+	font-family: arial;
+}

@@ -33,10 +33,12 @@
 			<button onclick="go(1)">Track 1 (Beginner)</button>
 		</div>
 	</div>
-	<audio src="Music/venicemain.mp3" loop="loop" type="audio/mp3" id="audioMain"></audio> 
+	<audio src="Music/Venice/1.mp3" loop="loop" type="audio/mp3" id="audioMain"></audio> 
 	<script src="Three/three.min.js"></script>
 	<script src="Three/OBJLoader.js"></script>
     <script>
+		document.getElementById("audioMain").load();
+		document.getElementById("audioMain").play();
 		var mode = "";
 		var loc = "";
 		function selectMode(modeName){
