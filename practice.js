@@ -67,9 +67,9 @@ function init() {
 		console.log("songEnded");
 		songNum++;
 		nextSong = "Music/Venice/" + i + ".mp3";
-		audioPlayer = document.getElementById('backgroundMusic');
+		audioPlayer = document.getElementById('backgroundMusic'); //This line doesn't do anything
 		audioPlayer = nextSong;
-		audioPlayer.load();
+		audioPlayer.load(); //audioPlayer at this point is a string, which does not have a function load() or play()
 		audioPlayer.play();
 		if (songNum == 7) // this is the end of the songs.
 		{
@@ -491,9 +491,11 @@ function init() {
 				});
 				
 					*/ // load a resource
+	
+	//This loader should be replaced by the track system
 	loader.load(
 		// resource URL
-		'Models/' + loc + track + '.obj',
+		'Models/' + loc + track + '.obj', 
 		// called when resource is loaded
 		function (object) {
 
@@ -581,10 +583,10 @@ function init() {
 
 
 }
-beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
-var beeMaterial = new THREE.MeshBasicMaterial({
-	map: beeTexture
-});
+//beeTexture = new THREE.TextureLoader().load("https://scanunicco.github.io/Boat-Race/Images/bee.png");
+//var beeMaterial = new THREE.MeshBasicMaterial({
+//	map: beeTexture
+//});
 
 
 function countdown() {
@@ -760,7 +762,7 @@ function animate() {
 		vector.multiplyScalar(acceleration.z);
 
 		velocity.x += vector.x;
-		velocity.y += vector.y;
+		//velocity.y += vector.y;
 		velocity.z += vector.z;
 
 		if (boat.position.x < 10 && boat.position.x > -10) {
@@ -789,7 +791,7 @@ function animate() {
 
 
 		controls.getObject().position.x += velocity.x * delta;
-		controls.getObject().position.y += velocity.y * delta;
+		//controls.getObject().position.y += velocity.y * delta;
 		controls.getObject().position.z += velocity.z * delta;
 
 
