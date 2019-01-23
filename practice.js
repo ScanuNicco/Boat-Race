@@ -68,8 +68,8 @@ function init() {
 		songNum++;
 		nextSong = "Music/Venice/" + i + ".mp3";
 		audioPlayer = document.getElementById('backgroundMusic');
-		audioPlayer.src = nextSong;
-		document.getElementById('backgroundMusic').load();
+		audioPlayer = nextSong;
+		audioPlayer.load();
 		audioPlayer.play();
 		if (songNum == 7) // this is the end of the songs.
 		{
