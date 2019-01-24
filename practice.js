@@ -66,9 +66,9 @@ function init() {
 	document.getElementById('backgroundMusic').addEventListener('ended', function () {
 		console.log("songEnded");
 		songNum++;
-		nextSong = "Music/Venice/" + i + ".mp3";
+		nextSong = "Music/Venice/" + songNum + ".mp3";
 		audioPlayer = document.getElementById('backgroundMusic'); //This line doesn't do anything
-		audioPlayer = nextSong;
+		audioPlayer.src = nextSong;
 		audioPlayer.load(); //audioPlayer at this point is a string, which does not have a function load() or play()
 		audioPlayer.play();
 		if (songNum == 7) // this is the end of the songs.
