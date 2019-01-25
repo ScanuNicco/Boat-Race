@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<link type="text/css" rel="stylesheet" href="menu.css">
-	<title>Scanu Productions Boat Race</title>
-	<style>
-		body { margin: 0; padding: 0; width: 100%; overflow-x: hidden;}
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="menu.css">
+    <title>Scanu Productions Boat Race</title>
+    <style>
+        body { margin: 0; padding: 0; width: 100%; overflow-x: hidden;}
 		canvas { width: 100%; height: 100%;}
 	</style>
 </head>
 
 <body>
-	<div class="center">
-		<!--<img src="Images/Logo.png" id="logo">-->
-		<div id="playContent">
-			<button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Singleplayer</button><br>
-			<button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Multiplayer</button><br>
-			<button onclick="selectMode('practice');">Practice Course</button>
+    <div class="center">
+        <!--<img src="Images/Logo.png" id="logo">-->
+        <div id="playContent">
+            <button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Singleplayer</button><br>
+            <button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Multiplayer</button><br>
+            <button onclick="selectMode('practice');">Practice Course</button>
             <br>
-		</div>
-		<div id="locSelect" style="display: none">
-			<h2>Select A Location</h2>
-			<button style="background: grey; cursor: not-allowed;">Amsterdam</button><br>
-			<button onclick="selectLocation('venice')">Venice</button>
-		</div>
-		<div id="trackSelect" style="display: none">
-			<h2>Select A Track</h2>
-			<button onclick="go(3)">Track 3 (Expert)</button><br>
-			<button onclick="go(2)">Track 2 (Moderate)</button><br>
-			<button onclick="go(1)">Track 1 (Beginner)</button>
-		</div>
-	</div>
-	<audio src="Music/Venice/1.mp3" loop="loop" type="audio/mp3" id="audioMain"></audio> 
-	<script src="Three/three.min.js"></script>
-	<script src="Three/OBJLoader.js"></script>
+        </div>
+        <div id="locSelect" style="display: none">
+            <h2>Select A Location</h2>
+            <button style="background: grey; cursor: not-allowed;">Amsterdam</button><br>
+            <button onclick="selectLocation('venice')">Venice</button>
+        </div>
+        <div id="trackSelect" style="display: none">
+            <h2>Select A Track</h2>
+            <button onclick="go(3)">Track 3 (Expert)</button><br>
+            <button onclick="go(2)">Track 2 (Moderate)</button><br>
+            <button onclick="go(1)">Track 1 (Beginner)</button>
+        </div>
+    </div>
+    <audio src="Music/main-loop.wav" loop="loop" type="audio/wav" id="audioMain"></audio>
+    <script src="Three/three.min.js"></script>
+    <script src="Three/OBJLoader.js"></script>
     <script>
-		document.getElementById("audioMain").load();
-		document.getElementById("audioMain").play();
-		var mode = "";
-		var loc = "";
-		function selectMode(modeName){
-			mode = modeName;
-			document.getElementById("playContent").style.display = "none";
-			document.getElementById("locSelect").style.display = "block";
-		}
-		
-		function selectLocation(locName){
-			loc = locName;
-			document.getElementById("locSelect").style.display = "none";
-			document.getElementById("trackSelect").style.display = "block";
-		}
-		
-		function go(track){
-			window.location.href = mode + ".html?location=" + loc + "&track=" + track;
-		}
+        setTimeout(playMusic, 500);
+        var mode = "";
+        var loc = "";
+
+        function selectMode(modeName) {
+            mode = modeName;
+            document.getElementById("playContent").style.display = "none";
+            document.getElementById("locSelect").style.display = "block";
+        }
+
+        function selectLocation(locName) {
+            loc = locName;
+            document.getElementById("locSelect").style.display = "none";
+            document.getElementById("trackSelect").style.display = "block";
+        }
+
+        function go(track) {
+            window.location.href = mode + ".html?location=" + loc + "&track=" + track;
+        }
+
+        function playMusic() {
+            document.getElementById("audioMain").load();
+            document.getElementById("audioMain").play();
+        }
 
     </script>
 </body>
+
 </html>
