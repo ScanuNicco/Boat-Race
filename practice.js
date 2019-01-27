@@ -496,7 +496,7 @@ function init() {
     //This loader should be replaced by the track system
     loader.load(
         // resource URL
-        'Models/' + loc + track + '.obj',
+        'Models/' + loc + '.obj',
         // called when resource is loaded
         function (object) {
 
