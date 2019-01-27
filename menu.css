@@ -30,15 +30,21 @@ button:hover{
     box-shadow: 5px 5px 2px rgba(0, 0, 0, .7);
 }
 #playContent, #locSelect, #trackSelect {
-    margin-top: 50%
+    margin-top: 50vh;
 }
 
 #background {
 	position: fixed;
-	width: 100%;
+    left: 0px;
+    z-index: -1;
 }
  
 h2 {
 		font-size: 50px;
 	font-family: arial;
+}
+
+#Name{
+    font-size: 78pt;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
 }

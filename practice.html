@@ -54,6 +54,10 @@
 					<td>
 						<button onclick="show('options'); setTimeout(controls.unlock, 20)" class="menuButton">Options</button>
 						<br></td>
+                    <td>
+                    <button onclick="show('disclaimer'); setTimeout(controls.unlock, 20)" class="menuButton">Disclaimer</button>
+						<br>
+                    </td>
 				</tr>
 			</table>
 		</div>
@@ -79,7 +83,12 @@
 			</p>
 			<button onclick="hide('credits')">Close</button>
 		</div>
-
+<div id="disclaimer" class="window" style="right: 100%" onclick="setTimeout(controls.unlock, 20)">
+			<h1>Disclaimer</h1>
+			<p>IMPORTANT: This game is in pre-alpha, everything is subject to change. Since this game is not done yet many features will have bugs and some may not work entirely.
+			</p>
+			<button onclick="hide('disclaimer')">Close</button>
+		</div>
 	</div>
 	<div id="died">
 		<h1>You Died</h1>
