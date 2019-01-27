@@ -1,129 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<link type="text/css" rel="stylesheet" href="menu.css">
-	<title>Scanu Productions Boat Race</title>
-	<style>
-		body { margin: 0; padding: 0; width: 100%; overflow-x: hidden;}
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="menu.css">
+    <title>Scanu Productions Boat Race</title>
+    <style>
+        body { margin: 0; padding: 0; width: 100%; overflow-x: hidden;}
 		canvas { width: 100%; height: 100%;}
 	</style>
 </head>
 
 <body>
-	<img src="Images/background.png" id="background">
-	<div class="center">
-		<img src="Images/Logo.png" id="logo">
-		<div id="playContent">
-			<button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Singleplayer</button><br>
-			<button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Multiplayer</button><br>
-			<button onclick="selectMode('practice');">Practice Course</button>
+    <div id="topBar">
+        <img src="http://scanurag.com/images/LargeScanuProdIcon.png" height="60px">
+        <h1 id="header">Beta</h1>
+        <div id="nav"><a href="/">Home</a><a class="active" style="color: red" href="Boat-Race">Boat Race</a></div>
+    </div>
+    <div class="center">
+        <img src="Images/background.png" id="background">
+        <!--<img src="Images/background.png" id="logo">-->
+        <br>
+        <h1 id="Name">BOAT RACE</h1>
+        <h3 style="text-shadow: 2px 2px 3px rgba(0, 0, 0, .5);">PRE-ALPHA</h3>
+        <div id="playContent">
+            <h2>Select A Mode</h2>
+            <button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Singleplayer</button><br>
+            <button onclick="location.href = '#'" style="background: grey; cursor: not-allowed;">Multiplayer</button><br>
+            <button onclick="selectMode('practice');">Practice Course</button>
             <br>
-            <button onclick="location.href = 'roadmap.html'">Roadmap</button>
-		</div>
-		<div id="locSelect" style="display: none">
-			<h2>Select A Location</h2>
-			<button style="background: grey; cursor: not-allowed;">Amsterdam</button><br>
-			<button onclick="selectLocation('venice')">Venice</button>
-		</div>
-		<div id="trackSelect" style="display: none">
-			<h2>Select A Track</h2>
-			<button style="background: grey; cursor: not-allowed;">Track 3 (Expert)</button><br>
-			<button style="background: grey; cursor: not-allowed;">Track 2 (Moderate)</button><br>
-			<button onclick="go(1)">Track 1 (Beginner)</button>
-		</div>
-	</div>
-	<audio src="Music/main.wav" autoplay="autoplay" loop="loop" type="audio/wav"></audio> 
-	<script src="Three/three.min.js"></script>
-	<script src="Three/OBJLoader.js"></script>
+        </div>
+        <div id="locSelect" style="display: none">
+            <h2>Select A Location</h2>
+            <button style="background: grey; cursor: not-allowed;">Amsterdam</button><br>
+            <button onclick="selectLocation('venice')">Venice</button>
+        </div>
+        <div id="trackSelect" style="display: none">
+            <h2>Select A Track</h2>
+            <button onclick="go(3)">Track 3 (Expert)</button><br>
+            <button onclick="go(2)">Track 2 (Moderate)</button><br>
+            <button onclick="go(1)">Track 1 (Beginner)</button>
+        </div>
+    </div>
+    <audio src="Music/main-loop.wav" loop="loop" type="audio/wav" id="audioMain"></audio>
+    <script src="Three/three.min.js"></script>
+    <script src="Three/OBJLoader.js"></script>
     <script>
-		var mode = "";
-		var loc = "";
-		function selectMode(modeName){
-			mode = modeName;
-			document.getElementById("playContent").style.display = "none";
-			document.getElementById("locSelect").style.display = "block";
-		}
-		
-		function selectLocation(locName){
-			loc = locName;
-			document.getElementById("locSelect").style.display = "none";
-			document.getElementById("trackSelect").style.display = "block";
-		}
-		
-		function go(track){
-			window.location.href = mode + ".html?location=" + loc + "&track=" + track;
-		}
-		/*
-        function loadBoat() {
-            // instantiate a loader
-            var loader = new THREE.OBJLoader();
+        setTimeout(playMusic, 500);
+        var mode = "";
+        var loc = "";
 
-            // load a resource
-            loader.load(
-                // resource URL
-                'Models/boat.obj',
-                // called when resource is loaded
-                function(object) {
-
-                    scene.add(object);
-                    object.rotation.x = Math.PI / -2;
-                    object.scale.set(.1, .1, .1);
-                    object.position.y = 4.5;
-                    var cube = object;
-
-                },
-                // called when loading is in progresses
-                function(xhr) {
-
-                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-                },
-                // called when loading has errors
-                function(error) {
-
-                    console.log('An error happened');
-
-                }
-            );
+        function selectMode(modeName) {
+            mode = modeName;
+            document.getElementById("playContent").style.display = "none";
+            document.getElementById("locSelect").style.display = "block";
         }
-        var WIDTH = window.innerWidth;
-        var HEIGHT = window.innerHeight;
-        var renderer = new THREE.WebGLRenderer({
-            antialias: true
-        });
-        renderer.setSize(WIDTH, HEIGHT);
-        renderer.setClearColor(0xDDDDDD, 1);
-        document.body.appendChild(renderer.domElement);
-        var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
-        camera.position.z = 50;
-        scene.add(camera);
-        var t = 0;
-        var boxGeometry = new THREE.BoxGeometry(10, 10, 10);
-        var basicMaterial = new THREE.MeshBasicMaterial({
-            color: 0x0095DD
-        });
-        var phongMaterial = new THREE.MeshPhongMaterial({
-            color: 0x0095DD
-        });
-        var lambertMaterial = new THREE.MeshLambertMaterial({
-            color: 0x0095DD
-        });
 
-            cube.position.y = -20;
-            cube.rotation.set(0.4, 0.2, 0);
-            var light = new THREE.PointLight(0xFFFFFF);
-            light.position.set(-10, 15, 50);
-            scene.add(light);
-
-        function render() {
-            requestAnimationFrame(render);
-            //cube.rotation.y += 0.02;
-            renderer.render(scene, camera);
-            t += 0.02;
+        function selectLocation(locName) {
+            loc = locName;
+            document.getElementById("locSelect").style.display = "none";
+            document.getElementById("trackSelect").style.display = "block";
         }
-        render();*/
+
+        function go(track) {
+            window.location.href = mode + ".html?location=" + loc + "&track=" + track;
+        }
+
+        function playMusic() {
+            document.getElementById("audioMain").load();
+            document.getElementById("audioMain").play();
+        }
+
     </script>
 </body>
+
 </html>
