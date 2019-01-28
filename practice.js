@@ -400,7 +400,7 @@ function init() {
         function (object) {
 
             scene.add(object);
-            //object.rotation.x = Math.PI / -2;
+            object.rotation.x = Math.PI / -2;
 
             object.scale.set(6, 6, 6);
             object.position.y = 4.5;
@@ -506,7 +506,7 @@ function init() {
             object.position.z = 625;
             object.position.y = -5;
             bridge2 = object;
-
+	    object.rotation.x = Math.PI / -2;
             collidableMeshList.push(bridge2.children[0]);
             bridge2.children[0].material.transparent = true;
             bridge2.children[0].material.opacity = 0.0;
