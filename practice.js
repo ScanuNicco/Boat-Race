@@ -400,7 +400,7 @@ function init() {
         function (object) {
 
             scene.add(object);
-            object.rotation.x = Math.PI / -2;
+            //object.rotation.x = Math.PI / -2;
 
             object.scale.set(6, 6, 6);
             object.position.y = 4.5;
