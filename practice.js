@@ -824,7 +824,7 @@ function animate() {
 
 
                 if (collisionResults != null) {
-
+		    try {
                     boat.rotation.z -= turnDist * 1.1;
 
                     var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
@@ -832,7 +832,7 @@ function animate() {
                     var reflectVector = {x: collisionResults.face.normal.x, y: 0, z: collisionResults.face.normal.y};
                     
                     newVelocity.reflect(reflectVector);
-
+		
                     controls.getObject().position.x -= (velocity.x * delta) + (directionVector.x - collisionResults[0].point.x);
 
                     controls.getObject().position.z -= (velocity.z * delta) + (directionVector.z - collisionResults[0].point.z);
@@ -842,6 +842,9 @@ function animate() {
                     controls.getObject().position.x += velocity.x * delta;
 
                     controls.getObject().position.z += velocity.z * delta;
+		    } catch(e) {
+			    alert("Error with collision: " + e.message);
+		    }
                 }
 
 
