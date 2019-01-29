@@ -824,9 +824,11 @@ function animate() {
 
 
                 if (collisionResults != null) {
-		    alert((velocity.x * delta) + (directionVector.x - collisionResults[0].point.x));
+		    alert("collision");
 		    alert(directionVector.x);
 		    alert(collisionResults[0].point.x);
+		    alert((velocity.x * delta) + (directionVector.x - collisionResults[0].point.x));
+		    
 		    try {
                     boat.rotation.z -= turnDist * 1.1;
 
