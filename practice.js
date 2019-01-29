@@ -1,4 +1,4 @@
-show("disclaimer");
+//show("disclaimer");
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -824,6 +824,9 @@ function animate() {
 
 
                 if (collisionResults != null) {
+		    alert((velocity.x * delta) + (directionVector.x - collisionResults[0].point.x));
+		    alert(directionVector.x);
+		    alert(collisionResults[0].point.x);
 		    try {
                     boat.rotation.z -= turnDist * 1.1;
 
