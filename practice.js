@@ -824,10 +824,10 @@ function animate() {
 
 
                 if (collisionResults != null) {
-		    alert("collision");
-		    alert(directionVector.x);
-		    alert(collisionResults[0].point.x);
-		    alert((velocity.x * delta) + (directionVector.x - collisionResults[0].point.x));
+		    //alert("collision");
+		    //alert(directionVector.x);
+		    //alert(collisionResults[0].point.x);
+		    //alert((velocity.x * delta) + (directionVector.x - collisionResults[0].point.x));
 		    
 		    try {
                     boat.rotation.z -= turnDist * 1.1;
@@ -838,9 +838,9 @@ function animate() {
                     
                     newVelocity.reflect(reflectVector);
 		
-                    controls.getObject().position.x -= (velocity.x * delta) + (directionVector.x - collisionResults[0].point.x);
+                    controls.getObject().position.x -= (velocity.x * delta) + (directionVector.x - collisionResults.point.x);
 
-                    controls.getObject().position.z -= (velocity.z * delta) + (directionVector.z - collisionResults[0].point.z);
+                    controls.getObject().position.z -= (velocity.z * delta) + (directionVector.z - collisionResults.point.z);
 
                     velocity = newVelocity;
 
