@@ -814,11 +814,35 @@ function animate() {
 
 
 
-        //var boatGeo = new THREE.Geometry().fromBufferGeometry(boat.children[0].geometry);
+        var boatGeo = new THREE.Geometry().fromBufferGeometry(boat.children[0].geometry);
 
 
 
-        checkCollision();
+        var collisionResults = checkCollision();
+
+
+                if (collisionResults != null) {
+
+                    boat.rotation.z -= turnDist * 1.1;
+
+                    var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
+
+                    newVelocity.reflect(collisionResults.face.normal);
+
+                    controls.getObject().position.x -= velocity.x * delta;
+
+                    controls.getObject().position.y -= velocity.y * delta;
+
+                    controls.getObject().position.z -= velocity.z * delta;
+
+                    velocity = newVelocity;
+
+                    controls.getObject().position.x += velocity.x * delta;
+
+                    controls.getObject().position.y += velocity.y * delta;
+
+                    controls.getObject().position.z += velocity.z * delta;
+                }
 
 
         prevTime = time;
