@@ -833,17 +833,13 @@ function animate() {
                     
                     newVelocity.reflect(reflectVector);
 
-                    controls.getObject().position.x -= velocity.x * delta;
+                    controls.getObject().position.x -= (velocity.x * delta) + (directionVector.x - collisionResults[0].point.x);
 
-                    controls.getObject().position.y -= velocity.y * delta;
-
-                    controls.getObject().position.z -= velocity.z * delta;
+                    controls.getObject().position.z -= (velocity.z * delta) + (directionVector.z - collisionResults[0].point.z);
 
                     velocity = newVelocity;
 
                     controls.getObject().position.x += velocity.x * delta;
-
-                    controls.getObject().position.y += velocity.y * delta;
 
                     controls.getObject().position.z += velocity.z * delta;
                 }
