@@ -827,7 +827,9 @@ function animate() {
 
                     var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
 
-                    newVelocity.reflect(collisionResults.face.normal);
+                    var reflectVector = {x: collisionResults.face.normal.x, y: 0, z: collisionResults.face.normal.y};
+                    
+                    newVelocity.reflect(reflectVector);
 
                     controls.getObject().position.x -= velocity.x * delta;
 
