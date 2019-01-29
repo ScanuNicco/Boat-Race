@@ -726,6 +726,20 @@ function renderDistance() {
     camera.updateProjectionMatrix();
 }
 
+		function checkCollision() {
+			for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
+				var localVertex = boat.geometry.vertices[vertexIndex].clone();
+				var globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
+				directionVector.subVectors(globalVertex, boat.position);
+				var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
+				var collisionResults = ray.intersectObjects(collidableMeshList);
+				if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
+					return collisionResults[0];
+				}
+			}
+			return null;
+		}
+
 
 function animate() {
     //alert("starting animate");
@@ -804,27 +818,7 @@ function animate() {
 
 
 
-        for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
-            //console.log("oof"); 
-            var localVertex = boat.geometry.vertices[vertexIndex].clone();
-            var globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
-            directionVector.subVectors(globalVertex, boat.position);
-            var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
-            var collisionResults = ray.intersectObjects(collidableMeshList);
-            if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
-                //By reducing speed and reversing direction, maybe i can make the boat bounce off of the walls instead of sticking to them
-                //Thats not how this works rag
-                var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
-                newVelocity.reflect(collisionResults[0].face.normal);
-                controls.getObject().position.x -= velocity.x * delta;
-                controls.getObject().position.y -= velocity.y * delta;
-                controls.getObject().position.z -= velocity.z * delta;
-                velocity = newVelocity;
-                controls.getObject().position.x += velocity.x * delta;
-                controls.getObject().position.y += velocity.y * delta;
-                controls.getObject().position.z += velocity.z * delta;
-            }
-        }
+        checkCollision();
 
 
         prevTime = time;
