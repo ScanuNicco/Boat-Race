@@ -713,6 +713,8 @@ function milToMin(millis) {
     return minutes + "." + (seconds < 10 ? '0' : '') + seconds;
 }
 
+document.getElementById("musicSwitch").checked = false;
+toggleMusic();
 function toggleMusic() {
     if (document.getElementById("musicSwitch").checked) {
         document.getElementById("backgroundMusic").play();
