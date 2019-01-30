@@ -732,19 +732,19 @@ function renderDistance() {
     camera.updateProjectionMatrix();
 }
 
-		function checkCollision() {
-			for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
-				var localVertex = boat.geometry.vertices[vertexIndex].clone();
-				globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
-				directionVector.subVectors(globalVertex, boat.position);
-				var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
-				var collisionResults = ray.intersectObjects(collidableMeshList);
-				if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
-					return collisionResults[0];
-				}
-			}
-			return null;
+function checkCollision() {
+	for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
+		var localVertex = boat.geometry.vertices[vertexIndex].clone();
+		globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
+		directionVector.subVectors(globalVertex, boat.position);
+		var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
+		var collisionResults = ray.intersectObjects(collidableMeshList);
+		if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
+			return collisionResults[0];
 		}
+	}
+	return null;
+}
 
 
 function animate() {
@@ -855,7 +855,7 @@ function animate() {
 		    collisionResults = checkCollision();
 			    
 		    //while (collisionResults != null) {
-			    controls.getObject().position.x += collisionResults.face.normal.x * COLLISION_CORRECTION_INCREMENT;
+			    controls.getObject().position.x -= collisionResults.face.normal.x * COLLISION_CORRECTION_INCREMENT;
 			    controls.getObject().position.z += collisionResults.face.normal.y * COLLISION_CORRECTION_INCREMENT;
 			    //collisionResults = checkCollision();
 		    //}
