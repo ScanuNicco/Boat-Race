@@ -838,15 +838,15 @@ function animate() {
                     
                     newVelocity.reflect(reflectVector);
 		
-                    controls.getObject().position.x -= (velocity.x * delta) + (directionVector.x - collisionResults.point.x);
+                    //controls.getObject().position.x -= (velocity.x * delta) + (directionVector.x - collisionResults.point.x);
 
-                    controls.getObject().position.z -= (velocity.z * delta) + (directionVector.z - collisionResults.point.z);
+                    //controls.getObject().position.z -= (velocity.z * delta) + (directionVector.z - collisionResults.point.z);
 
                     velocity = newVelocity;
 
-                    controls.getObject().position.x += velocity.x * delta;
+                   // controls.getObject().position.x += velocity.x * delta;
 
-                    controls.getObject().position.z += velocity.z * delta;
+                    //controls.getObject().position.z += velocity.z * delta;
 		    } catch(e) {
 			    alert("Error with collision: " + e.message);
 		    }
