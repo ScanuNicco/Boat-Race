@@ -48,6 +48,8 @@ var laps = 0;
 var songNum = 1;
 var nextSong = "";
 
+var globalVertex;
+
 init();
 playerHealthLower(50);
 immortal(6000);
@@ -731,7 +733,7 @@ function renderDistance() {
 		function checkCollision() {
 			for (var vertexIndex = 0; vertexIndex < boat.geometry.vertices.length; vertexIndex++) {
 				var localVertex = boat.geometry.vertices[vertexIndex].clone();
-				var globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
+				globalVertex = localVertex.applyMatrix4(boat.matrixWorld);
 				directionVector.subVectors(globalVertex, boat.position);
 				var ray = new THREE.Raycaster(boat.position, directionVector.clone().normalize(), 0, directionVector.length);
 				var collisionResults = ray.intersectObjects(collidableMeshList);
@@ -838,9 +840,9 @@ function animate() {
                     
                     newVelocity.reflect(reflectVector);
 		
-                    controls.getObject().position.x -= (velocity.x * delta) + (collisionResults.point.x - directionVector.normalize().clone().x);
+                    controls.getObject().position.x -= (velocity.x * delta) + (collisionResults.point.x - globalVertex.x);
 
-                    controls.getObject().position.z -= (velocity.z * delta) + (collisionResults.point.z - directionVector.normalize().clone().z);
+                    controls.getObject().position.z -= (velocity.z * delta) + (collisionResults.point.z - globalVertex.z);
 
                     velocity = newVelocity;
 
