@@ -854,11 +854,11 @@ function animate() {
 			    
 		    collisionResults = checkCollision();
 			    
-		    while (collisionResults != null) {
+		    //while (collisionResults != null) {
 			    controls.getObject().position.x += collisionResults.face.normal.x * COLLISION_CORRECTION_INCREMENT;
 			    controls.getObject().position.z += collisionResults.face.normal.y * COLLISION_CORRECTION_INCREMENT;
-			    collisionResults = checkCollision();
-		    }
+			    //collisionResults = checkCollision();
+		    //}
 		    } catch(e) {
 			    alert("Error with collision: " + e.message);
 		    }
