@@ -855,8 +855,8 @@ function animate() {
 		    collisionResults = checkCollision();
 			    
 		    //while (collisionResults != null) {
-			    controls.getObject().position.x -= collisionResults.face.normal.x * COLLISION_CORRECTION_INCREMENT;
-			    controls.getObject().position.z += collisionResults.face.normal.y * COLLISION_CORRECTION_INCREMENT;
+			    controls.getObject().position.x += collisionResults.face.normal.x * COLLISION_CORRECTION_INCREMENT;
+			    controls.getObject().position.z -= collisionResults.face.normal.y * COLLISION_CORRECTION_INCREMENT; //Don't know why this works but it does, probably related to rotating the track
 			    //collisionResults = checkCollision();
 		    //}
 		    } catch(e) {
