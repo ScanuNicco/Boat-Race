@@ -854,13 +854,13 @@ function animate() {
 			    
 		    collisionResults = checkCollision();
 			    
-		    while (collisionResults != null) {
-			    collisionResults = checkCollision();
+		    //while (collisionResults != null) {
+			 //   collisionResults = checkCollision();
 			    controls.getObject().position.x += collisionResults.face.normal.x * COLLISION_CORRECTION_INCREMENT;
 			    controls.getObject().position.z -= collisionResults.face.normal.y * COLLISION_CORRECTION_INCREMENT; //Don't know why this works but it does, probably related to rotating the track
-		    	    boat.position.x = controls.getObject().position.x;
-        		    boat.position.z = controls.getObject().position.z;
-		    }
+		    	//    boat.position.x = controls.getObject().position.x;
+        		//    boat.position.z = controls.getObject().position.z;
+		    //}
 		    } catch(e) {
 			    alert("Error with collision: " + e.message);
 		    }
