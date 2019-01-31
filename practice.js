@@ -100,7 +100,8 @@ function init() {
     var light = new THREE.DirectionalLight(0xffffff, 0.8);
     scene.add(light);
     scene.add(light.target);
-    light.target.position.x += 1;
+    light.target.position.x += .5;
+    light.target.position.z += .1
 
     var light = new THREE.AmbientLight(0x202020); // soft white light
     scene.add(light);
