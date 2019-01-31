@@ -97,8 +97,10 @@ function init() {
     scene.background = new THREE.Color(0x00ff00);
     scene.fog = new THREE.Fog(0xffffff, 200, 750);
 
-    var light = new THREE.DirectionalLight(0xffffff, 0.8);;
+    var light = new THREE.DirectionalLight(0xffffff, 0.8);
     scene.add(light);
+    scene.add(light.target);
+    light.target.position.x += 1;
 
     var light = new THREE.AmbientLight(0x202020); // soft white light
     scene.add(light);
