@@ -30,7 +30,7 @@ button:hover{
     box-shadow: 5px 5px 2px rgba(0, 0, 0, .7);
 }
 #playContent, #locSelect, #trackSelect {
-    margin-top: 50vh;
+    margin-top: 35vh;
 }
 
 #background {
