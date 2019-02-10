@@ -14,6 +14,8 @@ if (loc == null) {
     track = "1";
 }
 notify("Location: " + loc, "Track number " + track);
+show("startScreen");
+document.getElementById("locDisp").innerText = "Location: " + loc, "Track number " + track;
 
 //FPS counter setup
 var stats = new Stats();
