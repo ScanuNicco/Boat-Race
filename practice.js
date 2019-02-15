@@ -35,7 +35,7 @@ var turnLeft = false;
 var turnRight = false;
 var canJump = false;
 
-var COLLISION_CORRECTION_INCREMENT = .1;
+var COLLISION_CORRECTION_INCREMENT = 1;
 
 var collidableMeshList = []; //Meshes that can be collided with, initially everything but the water
 
@@ -843,9 +843,13 @@ function animate() {
 
                     var newVelocity = new THREE.Vector3(velocity.x, velocity.y, velocity.z);
 
-                    var reflectVector = {x: collisionResults.face.normal.x, y: 0, z: collisionResults.face.normal.y};
+                    var reflectVector = new THREE.Vector3(collisionResults.face.normal.x, 0, -collisionResults.face.normal.y);
+
+                    reflectVector = reflectVector.normalize();
+
+                    var v1 = new THREE.Vector3();
                     
-                    newVelocity.reflect(reflectVector);
+                    newVelocity.sub( v1.copy( reflectVector ).multiplyScalar( 2 * newVelocity.dot( reflectVector ) ) );//reflect(reflectVector);
 		
                     controls.getObject().position.x -= (velocity.x * delta)/* + (globalVertex.x - collisionResults.point.x)*/;
 
