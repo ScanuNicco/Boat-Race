@@ -14,6 +14,8 @@ if (loc == null) {
     track = "1";
 }
 notify("Location: " + loc, "Track number " + track);
+show("startScreen");
+document.getElementById("locDisp").innerText = "Location: " + loc, "Track number " + track;
 
 //FPS counter setup
 var stats = new Stats();
@@ -886,10 +888,10 @@ function animate() {
         } else {
             document.getElementById("speedDisplay").style.color = "green";
         }
-    }
-    water.material.uniforms.time.value += 1.0 / 60.0;
-
-    renderer.render(scene, camera);
 
     stats.update();
+    }
+	    renderer.render(scene, camera);
+			water.material.uniforms.time.value += 1.0 / 60.0;
+
 }
