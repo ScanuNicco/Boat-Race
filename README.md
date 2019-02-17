@@ -9,4 +9,5 @@ A boat racing game
 3. No non-manifold geometry or bad normals except for in hitboxes that can't be seen
 
 # Tips for importing OBJ files from blender
-In the export settings set Z Up and -X Forward
+- In the export settings set Z Up and -X Forward
+- If an object is displayed as a wireframe then you need to find the affected object in the OBJ file and delete the line data. It looks like this: l 34 2342. You can find it after the face data.
