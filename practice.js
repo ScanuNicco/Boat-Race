@@ -216,8 +216,8 @@ function init() {
     water.rotation.x = -Math.PI / 2;
     scene.add(water);
     var sky = new THREE.Sky();
-    sky.scale.setScalar(10000);;
-    scene.add(sky);
+    sky.scale.setScalar(10000);
+    //scene.add(sky);
     var uniforms = sky.material.uniforms;
     uniforms.turbidity.value = 10;
     uniforms.rayleigh.value = 2;
@@ -240,7 +240,7 @@ function init() {
         water.material.uniforms.sunDirection.value.copy(light.position).normalize();
         //camera.update( renderer, scene );
     }
-    updateSun();
+    //updateSun();
     // floor
 
     /*var floorGeometry = new THREE.PlaneBufferGeometry(2000, 2000, 100, 100);
