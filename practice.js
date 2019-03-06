@@ -214,7 +214,7 @@ function init() {
     );
     water.name = "water";
     //water.rotation.x = -Math.PI / 2;
-    scene.add(water);
+    //scene.add(water);
     var sky = new THREE.Sky();
     sky.scale.setScalar(10000);
     scene.add(sky);
